@@ -1,33 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatIconModule } from '@angular/material/icon';
+import { LayoutModule } from './layout/layout.module';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { ContentComponent } from './content/content.component';
-import { SideBarComponent } from './content/side-bar/side-bar.component';
-import { UsersComponent } from './content/users/users.component';
-import { PostsComponent } from './content/posts/posts.component';
-import { CategoriesComponent } from './content/categories/categories.component';
-import { CommentsComponent } from './content/comments/comments.component';
-import { MainComponent } from './content/main/main.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    ContentComponent,
-    SideBarComponent,
-    UsersComponent,
-    PostsComponent,
-    CategoriesComponent,
-    CommentsComponent,
-    MainComponent,
+    
   ],
   imports: [
+    MatIconModule,
     BrowserModule,
-    AppRoutingModule
-  ],
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    RouterModule,
+    LayoutModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
