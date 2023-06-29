@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ContentComponent } from './content/content.component';
 import { SideBarComponent } from './content/side-bar/side-bar.component';
+import { UsersComponent } from './content/users/users.component';
+import { PostsComponent } from './content/posts/posts.component';
+import { CategoriesComponent } from './content/categories/categories.component';
+import { CommentsComponent } from './content/comments/comments.component';
+import { MainComponent } from './content/main/main.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +18,11 @@ import { SideBarComponent } from './content/side-bar/side-bar.component';
     HeaderComponent,
     ContentComponent,
     SideBarComponent,
+    UsersComponent,
+    PostsComponent,
+    CategoriesComponent,
+    CommentsComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
