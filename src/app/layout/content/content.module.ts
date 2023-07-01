@@ -9,6 +9,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CommentsComponent } from './comments/comments.component';
 import { MainComponent } from './main/main.component';
 import { TableComponent } from './table/table.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TableComponent } from './table/table.component';
   ],
   imports: [
     CommonModule,
-    ContentRoutingModule
+    ContentRoutingModule,
+    FormsModule
   ],
   exports: [
     ContentRoutingModule

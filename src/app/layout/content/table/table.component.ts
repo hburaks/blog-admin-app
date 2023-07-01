@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TableService } from './table.service';
+import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -7,6 +9,7 @@ import { TableService } from './table.service';
 })
 export class TableComponent {
   @Input() table!: any[];
+  @Input()
   isAddNewItem : boolean = false;
   isEditItem : boolean[] = [];
 
@@ -16,9 +19,20 @@ export class TableComponent {
     
 
   }
-  addNewItem(){
-    this.addNewItem = this.tableService.addNewItem
+ 
+  value: any = "";
+  addNewItem() {
+    const newItem: any = {};
+    const keys = Object.keys(this.table[0]);
+  
+    for(let i = 0; i < keys.length; i++){
+      newItem[keys[i]] = this.value;
+
+    }
+    this.table.push(newItem);
+    this.isAddNewItem = false;
   }
+  
   showNewItemCard(){
     this.isAddNewItem = !this.isAddNewItem;
   }

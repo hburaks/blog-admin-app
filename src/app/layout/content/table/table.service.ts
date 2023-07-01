@@ -10,7 +10,7 @@ export class TableService {
     console.log("Table Service is working")
   }
   addNewItem(){
-    console.log("nothing added")
+    
   }
   editItem(){
     console.log("nothing edited")
