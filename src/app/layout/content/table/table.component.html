@@ -1,3 +1,14 @@
+<button type="button" class="btn btn-outline-success" (click)="showNewItemCard()" *ngIf="!isAddNewItem">Add New Item</button>
+<div class="overlay" *ngIf="isAddNewItem">
+    <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
+      <input class="form-control" type="text" placeholder="{{item.key}}" *ngFor="let item of table[0] | keyvalue ">
+      <div class="container d-flex gap-2">
+        <button type="button" class="btn btn-outline-success" (click)="addNewItem()">Add</button>
+        <button type="button" class="btn btn-outline-danger" (click)="showNewItemCard()">Cancel</button>
+      </div>
+    </div>
+</div>
+
 <table class="table">
   <thead>
     <tr>
@@ -5,9 +16,21 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of table">
-      <td *ngFor="let prop of item | keyvalue ">{{prop.value}}</td>
-    </tr>
+    <tr *ngFor="let item of table; let i = index">
+      <td *ngFor="let prop of item | keyvalue">{{prop.value}}</td>
+      <div class="container d-flex gap-2">
+        <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i)">Edit</button>
+        <button type="button" class="btn btn-outline-danger">Remove</button>
+      </div>
+      <div class="overlay" *ngIf="isEditItem[i]">
+        <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
+          <input class="form-control" type="text" placeholder="{{prop.value}}" *ngFor="let prop of table[i] | keyvalue">
+          <div class="container d-flex gap-2">
+            <button type="button" class="btn btn-outline-success" (click)="editItem()">Edit</button>
+            <button type="button" class="btn btn-outline-danger" (click)="showEditItemCard(i)">Cancel</button>
+          </div>
+        </div>
+      </div>
+      </tr>
   </tbody>
 </table>
-<button (click)="workingInTable()">Test for Service</button>

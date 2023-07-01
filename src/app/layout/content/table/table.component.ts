@@ -7,13 +7,28 @@ import { TableService } from './table.service';
 })
 export class TableComponent {
   @Input() table!: any[];
+  isAddNewItem : boolean = false;
+  isEditItem : boolean[] = [];
+
   constructor(
-    private tableService : TableService
+    private tableService : TableService,
   ) { 
+    
+
   }
-  workingInTable(){
-    this.tableService.working()
+  addNewItem(){
+    this.addNewItem = this.tableService.addNewItem
   }
+  showNewItemCard(){
+    this.isAddNewItem = !this.isAddNewItem;
+  }
+  editItem(){
+    this.editItem = this.tableService.editItem
+  }
+  showEditItemCard(i : number){
+    this.isEditItem[i] = !this.isEditItem[i];
+  }
+  
 }
 
 
