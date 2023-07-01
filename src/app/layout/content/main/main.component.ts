@@ -6,6 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent {
+  constructor(){
 
+    setTimeout(() => {
+      console.log("Hi it took 5 sec")
+    }, 5000);
+
+  }
 
 }

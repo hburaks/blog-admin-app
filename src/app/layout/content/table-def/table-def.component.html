@@ -1,18 +1,13 @@
 <table class="table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Description</th>
+      <th *ngFor="let item of users[0] | keyvalue ">{{item.key}}</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let user of users">
-      <td>{{ user.id }}</td>
-      <td>{{ user.name }}</td>
-      <td>{{ user.email }}</td>
+      <td *ngFor="let item of user | keyvalue ">{{item.value}}</td>
+
     </tr>
   </tbody>
 </table>
-
-

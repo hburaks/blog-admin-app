@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 
-
 @Component({
   selector: 'app-table',
   templateUrl: './table-def.component.html',
   styleUrls: ['./table-def.component.scss']
 })
-export class TableDefComponent {
+export class TableComponent {
   users: any[] = [
     {
       id: 1,
