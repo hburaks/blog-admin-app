@@ -1,0 +1,13 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let item of table[0] | keyvalue ">{{item.key}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of table">
+      <td *ngFor="let prop of item | keyvalue ">{{prop.value}}</td>
+    </tr>
+  </tbody>
+</table>
+<button (click)="workingInTable()">Test for Service</button>

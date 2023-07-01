@@ -8,7 +8,7 @@ import { PostsComponent } from './posts/posts.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CommentsComponent } from './comments/comments.component';
 import { MainComponent } from './main/main.component';
-import { TableComponent } from './table-def/table.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
