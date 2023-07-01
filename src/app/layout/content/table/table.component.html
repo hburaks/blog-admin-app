@@ -1,5 +1,6 @@
-<button type="button" class="btn btn-outline-success" (click)="showNewItemCard()" *ngIf="!isAddNewItem">Add New Item</button>
-<div class="overlay" *ngIf="isAddNewItem">
+<div class="container d-flex gap-2 m-2">
+  <button type="button" class="btn btn-outline-success" (click)="showNewItemCard()" *ngIf="!isAddNewItem">Add New Item</button>
+  <div class="overlay" *ngIf="isAddNewItem">
     <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
       <input class="form-control" type="text" placeholder="{{item.key}}" *ngFor="let item of table[0] | keyvalue ">
       <div class="container d-flex gap-2">
@@ -7,8 +8,10 @@
         <button type="button" class="btn btn-outline-danger" (click)="showNewItemCard()">Cancel</button>
       </div>
     </div>
+  </div>
+  <button class="btn btn-light" (click)="prevPage()" ><</button>
+  <button class="btn btn-light" (click)="nextPage()">></button>
 </div>
-
 <table class="table">
   <thead>
     <tr>
@@ -16,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of table; let i = index">
+    <tr *ngFor="let item of table | slice : (pageIndex*pageSize) : ((pageIndex*pageSize) + pageSize); let i = index">
       <td *ngFor="let prop of item | keyvalue">{{prop.value}}</td>
       <div class="container d-flex gap-2">
         <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i)">Edit</button>
