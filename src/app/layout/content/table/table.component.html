@@ -11,8 +11,8 @@
   </div>
   <div class="container d-flex align-items-center gap-2 justify-content-end">
     <p style="margin-bottom: 0px; margin-right: 30px;">{{pageIndex + 1}} / {{totalPageSize}}</p>
-    <button class="btn btn-light" (click)="prevPage()" ><</button>
-    <button class="btn btn-light" (click)="nextPage()">></button>
+    <button class="btn btn-light" (click)="prevPage()" [disabled]="pageIndex === 0"  ><</button>
+    <button class="btn btn-light" (click)="nextPage()" [disabled]="pageIndex === totalPageSize -1 ">></button>
   </div>
 </div>
 <table class="table">
