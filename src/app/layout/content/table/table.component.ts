@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TableService } from './table.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -15,7 +16,14 @@ export class TableComponent implements OnInit {
 
   constructor(
     private tableService : TableService,
-  ) {}
+    private route : ActivatedRoute,
+    private router : Router
+    ) {
+    const queryParams = this.route.snapshot.queryParams;
+    if(queryParams['p'] !== undefined ){
+      this.pageIndex = parseInt(queryParams['p']) - 1
+    }
+  }
   ngOnInit() {
     this.showPageInfo();
   }
@@ -40,21 +48,33 @@ export class TableComponent implements OnInit {
   showEditItemCard(i : number){
     this.isEditItem[i] = !this.isEditItem[i];
   }
-  nextPage(){
+  nextPage() {
     let totalPage = this.table.length / this.pageSize;
     let remainingItems = this.table.length % this.pageSize;
-    if(remainingItems > 0){
-      totalPage++
+    if (remainingItems > 0) {
+      totalPage++;
     }
-    if(this.pageIndex + 1 <= totalPage - 1 ){
-      this.pageIndex = this.pageIndex + 1;      
+    if (this.pageIndex + 1 <= totalPage - 1) {
+      this.pageIndex = this.pageIndex + 1;
+      this.updateQueryParam('p', this.pageIndex + 1);
     }
   }
-  prevPage(){
-    if(this.pageIndex - 1 >= 0 ){
+  
+  prevPage() {
+    if (this.pageIndex - 1 >= 0) {
       this.pageIndex = this.pageIndex - 1;
+      this.updateQueryParam('p', this.pageIndex + 1);
     }
   }
+  
+  private updateQueryParam(param: string, value: any) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { [param]: value },
+      queryParamsHandling: 'merge'
+    });
+  }
+  
 }
 
 
