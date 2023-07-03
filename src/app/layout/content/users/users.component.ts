@@ -19,11 +19,35 @@ export class UsersComponent implements OnInit {
   myPageInfoSubscription : Subscription | undefined;
 
   combinedClasses: string = "";
-
+  nameIn : string = "";
+  emailIn : string = "";
+  isActiveIn : boolean = false 
 
   
   addNewItem(){
     this.addNewItem = this.tableService.addNewItem
+  }
+  addNewItemDetails(){
+    if(this.nameIn && this.emailIn){
+      const currentDate = new Date();
+      const creationDateIn = currentDate.toISOString().slice(0, 10); // YYYY-MM-DD formatında geçerli tarih
+    
+      this.usersService.addNewItemDetails(
+        this.nameIn,
+        this.emailIn,
+        creationDateIn,
+        this.isActiveIn
+      )
+      this.updateIsAddNewItemValue()
+      this.clearFormFields();
+    } else{
+      alert("Please fill the blank input")
+    }
+  }
+  clearFormFields() {
+    this.nameIn = "";
+    this.emailIn = "";
+    this.isActiveIn = false;
   }
   editItem(){
     this.editItem = this.tableService.editItem
@@ -34,6 +58,10 @@ export class UsersComponent implements OnInit {
   }
   updateIsAddNewItemValue() {
     this.tableService.setIsAddNewItemValue();
+  }
+  getItemId(i: number){
+    console.log(this.users[i].id)
+    return this.users[i].id
   }
   
   constructor(
@@ -58,8 +86,4 @@ export class UsersComponent implements OnInit {
         this.myPageInfoSubscription.unsubscribe();
       }
     }
-    
-
-
-    
 }

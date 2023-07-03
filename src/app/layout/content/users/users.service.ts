@@ -42,10 +42,18 @@ export class UsersService {
       is_active: true
     }
   ];
-
   constructor() { }
-
   getUserList(){
     return this.users
   }
+  addNewItemDetails(nameIn : string, emailIn : string, creationDateIn : string, isActiveIn : boolean ){
+    this.users.push({
+      id: this.users.length + 1,
+      name: nameIn,
+      email: emailIn,
+      creation_date: creationDateIn,
+      is_active: isActiveIn,
+    })
+  }
+  
 }

@@ -48,4 +48,5 @@ export class TableService {
     this.combinedClasses = 'container d-flex align-items-center gap-2 justify-content-between';
     return this.combinedClasses;
   }
+  
 }

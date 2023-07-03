@@ -10,6 +10,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { MainComponent } from './main/main.component';
 import { TableComponent } from './table/table.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
   ],
   imports: [
     CommonModule,
-    ContentRoutingModule
+    ContentRoutingModule,
+    FormsModule
   ],
   exports: [
     ContentRoutingModule
