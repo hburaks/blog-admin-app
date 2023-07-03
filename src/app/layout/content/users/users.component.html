@@ -1,7 +1,22 @@
 <app-table [table]="users"></app-table>
 <div class="overlay" *ngIf="isAddNewItem">
   <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
-    <input class="form-control" type="text" placeholder="{{item.key}}" *ngFor="let item of users[0] | keyvalue ">
+    <div [ngClass]="combinedClasses">
+      <label for="name">Name:</label>
+      <input class="form-control" type="text" id="name" placeholder="username">
+    </div>
+    <div [ngClass]="combinedClasses">
+      <label for="email">Email:</label>
+      <input class="form-control" type="text" id="email" placeholder="example@example.com">
+    </div>
+    <div [ngClass]="combinedClasses">
+      <label for="creation_date">Creation Date:</label>
+      <input class="form-control" type="date" id="creation_date" placeholder="">
+    </div>
+    <div [ngClass]="combinedClasses">
+      <label for="is_active">Is Active:</label>
+      <input class="form-check-input" type="checkbox" id="is_active" name="is_active">
+    </div>
     <div class="container d-flex gap-2">
       <button type="button" class="btn btn-outline-success" (click)="addNewItem()">Add</button>
       <button type="button" class="btn btn-outline-danger" (click)="updateIsAddNewItemValue()">Cancel</button>
@@ -11,20 +26,43 @@
 <table class="table">
   <thead>
     <tr>
-      <th *ngFor="let item of users[0] | keyvalue ">{{item.key}}</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Creation Date</th>
+      <th>Is Active</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of users | slice : (pageInfo.pageIndex*pageInfo.pageSize) : ((pageInfo.pageIndex*pageInfo.pageSize) + pageInfo.pageSize); let i = index">
-      <td *ngFor="let prop of item | keyvalue">{{prop.value}}</td>
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.creation_date}}</td>
+      <td>{{item.is_active}}</td>
       <div class="container d-flex gap-2">
         <a [routerLink]="'/' + users[0].id" class="btn btn-outline-secondary">i</a>
         <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i)">Edit</button>
         <button type="button" class="btn btn-outline-danger">Remove</button>
       </div>
       <div class="overlay" *ngIf="isEditItem[i]">
-        <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
-          <input class="form-control" type="text" placeholder="{{prop.value}}" *ngFor="let prop of users[i] | keyvalue">
+        <div class="container d-flex gap-2 m-3 p-3 card">
+          <div [ngClass]="combinedClasses">
+            <label for="name">Name:</label>
+            <input class="form-control" type="text" id="name" [value]="item.name">
+          </div>
+          <div [ngClass]="combinedClasses">
+            <label for="email">Email:</label>
+            <input class="form-control" type="text" id="email" [value]="item.email">
+          </div>
+          <div [ngClass]="combinedClasses">
+            <label for="creation_date">Creation Date:</label>
+            <input class="form-control" type="date" id="creation_date" [value]="item.creation_date">
+          </div>
+          <div [ngClass]="combinedClasses">
+            <label for="is_active">Is Active:</label>
+            <input class="form-check-input" type="checkbox" id="is_active" name="is_active" [checked]="item.is_active">
+          </div>
           <div class="container d-flex gap-2">
             <button type="button" class="btn btn-outline-success" (click)="editItem()">Edit</button>
             <button type="button" class="btn btn-outline-danger" (click)="showEditItemCard(i)">Cancel</button>

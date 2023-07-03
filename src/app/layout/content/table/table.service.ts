@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class TableService {
   isAddNewItem: boolean = false;
   isEditItem : boolean[] = [];
-
+  combinedClasses : string = "";
   
   private pageInfoSubject: BehaviorSubject<any> = new BehaviorSubject<any>({
     pageIndex: 0,
@@ -44,8 +44,8 @@ export class TableService {
   getIsEditItem(){
     return this.isEditItem
   }
-
-  
-  
-
+  getCombinedClasses(): string {
+    this.combinedClasses = 'container d-flex align-items-center gap-2 justify-content-between';
+    return this.combinedClasses;
+  }
 }

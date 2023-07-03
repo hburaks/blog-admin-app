@@ -18,7 +18,9 @@ export class UsersComponent implements OnInit {
   pageInfo : any = {}
   myPageInfoSubscription : Subscription | undefined;
 
-  
+  combinedClasses: string = "";
+
+
   
   addNewItem(){
     this.addNewItem = this.tableService.addNewItem
@@ -37,7 +39,8 @@ export class UsersComponent implements OnInit {
   constructor(
     private usersService : UsersService,
     private tableService : TableService
-    ){}
+    ){
+    }
     ngOnInit(): void {
       this.myIsAddNewItemSubscription = this.tableService.isAddNewItem$.subscribe(value => {
         this.isAddNewItem = value;
@@ -45,11 +48,14 @@ export class UsersComponent implements OnInit {
       this.myPageInfoSubscription = this.tableService.PageInfo$.subscribe(value => {
         this.pageInfo = value;
       }) 
-      
+      this.combinedClasses = this.tableService.getCombinedClasses();
     }
     ngOnDestroy(): void {
       if (this.myIsAddNewItemSubscription) {
         this.myIsAddNewItemSubscription.unsubscribe();
+      }
+      if (this.myPageInfoSubscription) {
+        this.myPageInfoSubscription.unsubscribe();
       }
     }
     
