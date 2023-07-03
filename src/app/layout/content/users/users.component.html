@@ -3,16 +3,16 @@
   <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
     <div [ngClass]="combinedClasses">
       <label for="name">Name:</label>
-      <input class="form-control" type="text" id="name" placeholder="username" [(ngModel)]="nameIn">
+      <input class="form-control" type="text" id="name" placeholder="username" [(ngModel)]="nameNew">
     </div>
     <div [ngClass]="combinedClasses">
       <label for="email">Email:</label>
-      <input class="form-control" type="text" id="email" placeholder="example@example.com" [(ngModel)]="emailIn">
+      <input class="form-control" type="text" id="email" placeholder="example@example.com" [(ngModel)]="emailNew">
     </div>
    
     <div [ngClass]="combinedClasses">
       <label for="is_active">Is Active:</label>
-      <input class="form-check-input" type="checkbox" id="is_active" name="is_active" [(ngModel)]="isActiveIn">
+      <input class="form-check-input" type="checkbox" id="is_active" name="is_active" [(ngModel)]="isActiveNew">
     </div>
     <div class="container d-flex gap-2 justify-content-center">
       <button type="button" class="btn btn-outline-success" (click)="addNewItemDetails()">Add</button>
@@ -39,29 +39,29 @@
       <td>{{item.is_active}}</td>
       <div class="container d-flex gap-2">
         <a [routerLink]="'/users/'+ item.id" class="btn btn-outline-secondary">i</a>
-        <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i)">Edit</button>
-        <button type="button" class="btn btn-outline-danger">Remove</button>
+        <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(i)">Edit</button>
+        <button type="button" class="btn btn-outline-danger" (click)="removeItem(i)">Remove</button>
       </div>
       <div class="overlay" *ngIf="isEditItem[i]">
         <div class="container d-flex gap-2 m-3 p-3 card">
           <div [ngClass]="combinedClasses">
             <label for="name">Name:</label>
-            <input class="form-control" type="text" id="name" [value]="item.name">
+            <input class="form-control" type="text" id="name" [value]="item.name" [(ngModel)]="nameIn">
           </div>
           <div [ngClass]="combinedClasses">
             <label for="email">Email:</label>
-            <input class="form-control" type="text" id="email" [value]="item.email">
+            <input class="form-control" type="text" id="email" [value]="item.email" [(ngModel)]="emailIn">
           </div>
           <div [ngClass]="combinedClasses">
             <label for="creation_date">Creation Date:</label>
-            <input class="form-control" type="date" id="creation_date" [value]="item.creation_date">
+            <input class="form-control" type="date" id="creation_date" [value]="item.creation_date" [(ngModel)]="creationDateIn">
           </div>
           <div [ngClass]="combinedClasses">
             <label for="is_active">Is Active:</label>
-            <input class="form-check-input" type="checkbox" id="is_active" name="is_active" [checked]="item.is_active">
+            <input class="form-check-input" type="checkbox" id="is_active" name="is_active" [checked]="item.is_active" [(ngModel)]="isActiveIn">
           </div>
           <div class="container d-flex gap-2 justify-content-center">
-            <button type="button" class="btn btn-outline-success" (click)="editItem()">Edit</button>
+            <button type="button" class="btn btn-outline-success" (click)="editItem(i)">Edit</button>
             <button type="button" class="btn btn-outline-danger" (click)="showEditItemCard(i)">Cancel</button>
           </div>
         </div>

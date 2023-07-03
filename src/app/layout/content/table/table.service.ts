@@ -32,9 +32,7 @@ export class TableService {
   addNewItem(){
     console.log("nothing added")
   }
-  editItem(){
-    console.log("nothing edited")
-  }
+  
   getIsAddNewItem(){
     return this.isAddNewItem
   }

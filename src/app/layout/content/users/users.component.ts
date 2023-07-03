@@ -19,24 +19,31 @@ export class UsersComponent implements OnInit {
   myPageInfoSubscription : Subscription | undefined;
 
   combinedClasses: string = "";
+  
+  nameNew : string = "";
+  emailNew : string = "";
+  isActiveNew : boolean = false;
+
   nameIn : string = "";
   emailIn : string = "";
-  isActiveIn : boolean = false 
+  creationDateIn : string = "";
+  isActiveIn : boolean = false;
+
 
   
   addNewItem(){
     this.addNewItem = this.tableService.addNewItem
   }
   addNewItemDetails(){
-    if(this.nameIn && this.emailIn){
+    if(this.nameNew && this.emailNew){
       const currentDate = new Date();
-      const creationDateIn = currentDate.toISOString().slice(0, 10); // YYYY-MM-DD formatında geçerli tarih
+      const creationDateNew = currentDate.toISOString().slice(0, 10); // YYYY-MM-DD formatında geçerli tarih
     
       this.usersService.addNewItemDetails(
-        this.nameIn,
-        this.emailIn,
-        creationDateIn,
-        this.isActiveIn
+        this.nameNew,
+        this.emailNew,
+        creationDateNew,
+        this.isActiveNew
       )
       this.updateIsAddNewItemValue()
       this.clearFormFields();
@@ -45,17 +52,37 @@ export class UsersComponent implements OnInit {
     }
   }
   clearFormFields() {
-    this.nameIn = "";
-    this.emailIn = "";
-    this.isActiveIn = false;
+    this.nameNew = "";
+    this.emailNew = "";
+    this.isActiveNew = false;
   }
-  editItem(){
-    this.editItem = this.tableService.editItem
+  removeItem(i : number) {
+    this.removeItem = this.usersService.removeItem
+}
+  editItem(i : number){
+      if(this.nameIn && this.emailIn && this.creationDateIn){
+        this.usersService.editItem( i ,
+          this.nameIn,
+          this.emailIn,
+          this.creationDateIn,
+          this.isActiveIn
+        )
+        this.showEditItemCard(i)
+      } else{
+        alert("Please fill the blank input")
+      }
   }
   
   showEditItemCard(i : number){
     this.showEditItemCard = this.tableService.showEditItemCard;
   }
+  updateEditInputs(i:number){
+    this.nameIn = this.users[i].name;
+    this.emailIn = this.users[i].email;
+    this.creationDateIn = this.users[i].creation_date;
+    this.isActiveIn = this.users[i].is_active;
+  }
+  
   updateIsAddNewItemValue() {
     this.tableService.setIsAddNewItemValue();
   }

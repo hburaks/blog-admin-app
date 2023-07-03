@@ -46,14 +46,25 @@ export class UsersService {
   getUserList(){
     return this.users
   }
-  addNewItemDetails(nameIn : string, emailIn : string, creationDateIn : string, isActiveIn : boolean ){
+  addNewItemDetails(nameNew : string, emailNew : string, creationDateNew : string, isActiveNew : boolean ){
     this.users.push({
       id: this.users.length + 1,
+      name: nameNew,
+      email: emailNew,
+      creation_date: creationDateNew,
+      is_active: isActiveNew,
+    })
+  }
+  removeItem(i: number) {
+      this.users.splice(i, 1);
+  }
+  editItem(i : number, nameIn : string, emailIn : string, creationDateIn : string, isActiveIn : boolean){
+    this.users[i] = {
+      id: i,
       name: nameIn,
       email: emailIn,
       creation_date: creationDateIn,
       is_active: isActiveIn,
-    })
+    }
   }
-  
 }
