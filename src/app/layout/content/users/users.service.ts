@@ -56,7 +56,11 @@ export class UsersService {
     })
   }
   removeItem(i: number) {
+    if(this.users.length < 2){
+      alert("You can not delete the last user.")
+    }else {
       this.users.splice(i, 1);
+    }
   }
   editItem(i : number, nameIn : string, emailIn : string, creationDateIn : string, isActiveIn : boolean){
     this.users[i] = {
