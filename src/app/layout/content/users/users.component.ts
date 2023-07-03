@@ -1,46 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Users } from './users';
+import { UsersService } from './users.service';
+import { TableService } from '../table/table.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent {
-  users: any[] = [
-    {
-      id: 1,
-      name: "dcaughan0",
-      email: "flewsy0@census.gov",
-      creation_date: "2008-09-27",
-      is_active: true
-    },
-    {
-      id: 2,
-      name: "mswanton1",
-      email: "kolyhane1@theguardian.com",
-      creation_date: "2015-09-14",
-      is_active: true
-    },
-    {
-      id: 3,
-      name: "wmannion2",
-      email: "jisacoff2@archive.org",
-      creation_date: "2022-09-27",
-      is_active: false
-    },
-    {
-      id: 4,
-      name: "cwilacot3",
-      email: "bhadwin3@nhs.uk",
-      creation_date: "2009-06-22",
-      is_active: true
-    },
-    {
-      id: 5,
-      name: "mdulson4",
-      email: "wsherred4@ameblo.jp",
-      creation_date: "2000-09-27",
-      is_active: true
+export class UsersComponent implements OnInit {
+  tableIdName: string = 'users.id';
+  users : Users[] = this.usersService.getUserList();
+  isEditItem : boolean[] = this.tableService.getIsEditItem();
+  isAddNewItem: boolean = false;
+  myIsAddNewItemSubscription: Subscription | undefined;
+  pageInfo : any = {}
+  myPageInfoSubscription : Subscription | undefined;
+
+  
+  
+  addNewItem(){
+    this.addNewItem = this.tableService.addNewItem
+  }
+  editItem(){
+    this.editItem = this.tableService.editItem
+  }
+  
+  showEditItemCard(i : number){
+    this.showEditItemCard = this.tableService.showEditItemCard;
+  }
+  updateIsAddNewItemValue() {
+    this.tableService.setIsAddNewItemValue();
+  }
+  
+  constructor(
+    private usersService : UsersService,
+    private tableService : TableService
+    ){}
+    ngOnInit(): void {
+      this.myIsAddNewItemSubscription = this.tableService.isAddNewItem$.subscribe(value => {
+        this.isAddNewItem = value;
+      });
+      this.myPageInfoSubscription = this.tableService.PageInfo$.subscribe(value => {
+        this.pageInfo = value;
+      }) 
+      
     }
-  ];
+    ngOnDestroy(): void {
+      if (this.myIsAddNewItemSubscription) {
+        this.myIsAddNewItemSubscription.unsubscribe();
+      }
+    }
+    
+
+
+    
 }

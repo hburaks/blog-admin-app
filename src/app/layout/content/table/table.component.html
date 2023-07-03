@@ -1,42 +1,8 @@
 <div class="container d-flex  m-2 ">
-  <button type="button" class="btn btn-outline-success" style="width: 150px; height: 36px;" (click)="showNewItemCard()" *ngIf="!isAddNewItem">Add New Item</button>
-  <div class="overlay" *ngIf="isAddNewItem">
-    <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
-      <input class="form-control" type="text" placeholder="{{item.key}}" *ngFor="let item of table[0] | keyvalue ">
-      <div class="container d-flex gap-2">
-        <button type="button" class="btn btn-outline-success" (click)="addNewItem()">Add</button>
-        <button type="button" class="btn btn-outline-danger" (click)="showNewItemCard()">Cancel</button>
-      </div>
-    </div>
-  </div>
+  <button type="button" class="btn btn-outline-success" style="width: 150px; height: 36px;" (click)="updateIsAddNewItemValue()">Add New Item</button>
   <div class="container d-flex align-items-center gap-2 justify-content-end">
-    <p style="margin-bottom: 0px; margin-right: 30px;">{{pageIndex + 1}} / {{totalPageSize}}</p>
-    <button class="btn btn-light" (click)="prevPage()" [disabled]="pageIndex === 0"  ><</button>
-    <button class="btn btn-light" (click)="nextPage()" [disabled]="pageIndex === totalPageSize -1 ">></button>
+    <p style="margin-bottom: 0px; margin-right: 30px;">{{pageInfo.pageIndex + 1}} / {{pageInfo.totalPageSize + 1}}</p>
+    <button class="btn btn-light" (click)="prevPage()" [disabled]="pageInfo.pageIndex === 0"  ><</button>
+    <button class="btn btn-light" (click)="nextPage()" [disabled]="pageInfo.pageIndex === pageInfo.totalPageSize ">></button>
   </div>
 </div>
-<table class="table">
-  <thead>
-    <tr>
-      <th *ngFor="let item of table[0] | keyvalue ">{{item.key}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of table | slice : (pageIndex*pageSize) : ((pageIndex*pageSize) + pageSize); let i = index">
-      <td *ngFor="let prop of item | keyvalue">{{prop.value}}</td>
-      <div class="container d-flex gap-2">
-        <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i)">Edit</button>
-        <button type="button" class="btn btn-outline-danger">Remove</button>
-      </div>
-      <div class="overlay" *ngIf="isEditItem[i]">
-        <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
-          <input class="form-control" type="text" placeholder="{{prop.value}}" *ngFor="let prop of table[i] | keyvalue">
-          <div class="container d-flex gap-2">
-            <button type="button" class="btn btn-outline-success" (click)="editItem()">Edit</button>
-            <button type="button" class="btn btn-outline-danger" (click)="showEditItemCard(i)">Cancel</button>
-          </div>
-        </div>
-      </div>
-      </tr>
-  </tbody>
-</table>

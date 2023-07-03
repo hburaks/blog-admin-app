@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TableService } from './table.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -8,62 +9,60 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TableComponent implements OnInit {
   @Input() table!: any[];
-  isAddNewItem : boolean = false;
-  isEditItem : boolean[] = [];
-  pageIndex : number = 0;
-  pageSize : number = 10;
-  totalPageSize : number = 0;
+  @Input() tableIdName!: string;
+
+
+  pageInfo : any = {}
+  myPageInfoSubscription : Subscription | undefined;
 
   constructor(
     private tableService : TableService,
     private route : ActivatedRoute,
     private router : Router
     ) {
+   
+  }
+   
+  ngOnInit(): void {
+    this.myPageInfoSubscription = this.tableService.PageInfo$.subscribe(value => {
+      this.pageInfo = value;
+    }) 
     const queryParams = this.route.snapshot.queryParams;
-    if(queryParams['p'] !== undefined ){
-      this.pageIndex = parseInt(queryParams['p']) - 1
+    if (queryParams['p'] !== undefined) {
+    this.pageInfo.pageIndex = parseInt(queryParams['p']) - 1;
+    } else {
+    this.pageInfo.pageIndex = 0;
     }
-  }
-  ngOnInit() {
-    this.showPageInfo();
+    this.myPageInfoSubscription = this.tableService.PageInfo$.subscribe(value => {
+      this.pageInfo = value;
+    });
   }
   
+ 
   
-  showPageInfo(){
-    this.totalPageSize = Math.floor(this.table.length / this.pageSize);
-    let remainingItems = this.table.length % this.pageSize;
-    if(remainingItems > 0){
-      this.totalPageSize++
-    }
-  }
   addNewItem(){
     this.addNewItem = this.tableService.addNewItem
   }
-  showNewItemCard(){
-    this.isAddNewItem = !this.isAddNewItem;
-  }
-  editItem(){
-    this.editItem = this.tableService.editItem
-  }
-  showEditItemCard(i : number){
-    this.isEditItem[i] = !this.isEditItem[i];
-  }
+  
+  
+  
+  
   nextPage() {
-    let totalPage = this.table.length / this.pageSize;
-    let remainingItems = this.table.length % this.pageSize;
+    this.pageInfo.totalPage = Math.floor(this.table.length / this.pageInfo.pageSize);
+    let remainingItems = this.table.length % this.pageInfo.pageSize;
     if (remainingItems > 0) {
-      totalPage++;
+      this.pageInfo.totalPage++;
     }
-    if (this.pageIndex + 1 <= totalPage - 1) {
-      this.pageIndex = this.pageIndex + 1;
-      this.updateQueryParam('p', this.pageIndex + 1);
+    if (this.pageInfo.pageIndex + 1 < this.pageInfo.totalPage) {
+      this.pageInfo.pageIndex++;
+      this.updateQueryParam('p', this.pageInfo.pageIndex + 1);
     }
   }
   
   prevPage() {
-    if (this.pageIndex - 1 >= 0) {
-      this.pageIndex = this.pageIndex - 1;
-      this.updateQueryParam('p', this.pageIndex + 1);
+    if (this.pageInfo.pageIndex > 0) {
+      this.pageInfo.pageIndex--;
+      this.updateQueryParam('p', this.pageInfo.pageIndex + 1);
     }
   }
   
@@ -73,6 +72,15 @@ export class TableComponent implements OnInit {
       queryParams: { [param]: value },
       queryParamsHandling: 'merge'
     });
+  }
+
+  updateIsAddNewItemValue() {
+    this.tableService.setIsAddNewItemValue();
+  }
+
+  
+  setPageInfo(totalPageSize : number){
+    this.tableService.setPageInfo(totalPageSize)
   }
   
 }

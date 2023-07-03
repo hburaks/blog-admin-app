@@ -9,6 +9,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CommentsComponent } from './comments/comments.component';
 import { MainComponent } from './main/main.component';
 import { TableComponent } from './table/table.component';
+import { UserDetailsComponent } from './users/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TableComponent } from './table/table.component';
     CategoriesComponent,
     CommentsComponent,
     MainComponent,
-    TableComponent
+    TableComponent,
+    UserDetailsComponent
   ],
   imports: [
     CommonModule,

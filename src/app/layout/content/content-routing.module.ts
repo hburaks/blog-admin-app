@@ -6,6 +6,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { PostsComponent } from './posts/posts.component';
 import { UsersComponent } from './users/users.component';
 import { MainComponent } from './main/main.component';
+import { UserDetailsComponent } from './users/user-details/user-details.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'comments', component : CommentsComponent},
   {path: 'posts', component : PostsComponent},
   {path: 'users', component : UsersComponent},
+  {path: 'users/:id', component : UserDetailsComponent},
 ];
 
 @NgModule({
