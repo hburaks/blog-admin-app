@@ -46,6 +46,9 @@ export class UsersService {
   getUserList(){
     return this.users
   }
+  getUser(index: number): Users | undefined {
+    return this.users.find((user: Users) => user.id === index);
+  }
   addNewItemDetails(nameNew : string, emailNew : string, creationDateNew : string, isActiveNew : boolean ){
     this.users.push({
       id: this.users.length + 1,
@@ -64,7 +67,7 @@ export class UsersService {
   }
   editItem(i : number, nameIn : string, emailIn : string, creationDateIn : string, isActiveIn : boolean){
     this.users[i] = {
-      id: i,
+      id: i + 1,
       name: nameIn,
       email: emailIn,
       creation_date: creationDateIn,

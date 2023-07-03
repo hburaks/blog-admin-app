@@ -1,1 +1,9 @@
-<p>user-details works!</p>
+<div class="container d-flex justify-content-center">
+  <ul class="list-group" *ngIf="userItem" style="width: 50vw;">
+    <li class="list-group-item"><strong>Id: </strong> {{userItem.id}}</li>
+    <li class="list-group-item"><strong>Name: </strong> {{userItem.name}}</li>
+    <li class="list-group-item"><strong>Email: </strong> {{userItem.email}}</li>
+    <li class="list-group-item"><strong>Creation Date: </strong> {{userItem.creation_date}}</li>
+    <li class="list-group-item"><strong>Is Active: </strong> {{userItem.is_active}}</li>
+  </ul>
+</div>
