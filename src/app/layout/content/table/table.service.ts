@@ -29,10 +29,6 @@ export class TableService {
     this.isAddNewItemSubject.next(!this.isAddNewItemSubject.value);
   }
 
-  addNewItem(){
-    console.log("nothing added")
-  }
-  
   getIsAddNewItem(){
     return this.isAddNewItem
   }

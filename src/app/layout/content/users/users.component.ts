@@ -29,11 +29,30 @@ export class UsersComponent implements OnInit {
   creationDateIn : string = "";
   isActiveIn : boolean = false;
 
-
+  constructor(
+    private usersService : UsersService,
+    private tableService : TableService
+    ){
+    }
+    ngOnInit(): void {
+      this.myIsAddNewItemSubscription = this.tableService.isAddNewItem$.subscribe(value => {
+        this.isAddNewItem = value;
+      });
+      this.myPageInfoSubscription = this.tableService.PageInfo$.subscribe(value => {
+        this.pageInfo = value;
+      }) 
+      this.combinedClasses = this.tableService.getCombinedClasses();
+    }
+    ngOnDestroy(): void {
+      if (this.myIsAddNewItemSubscription) {
+        this.myIsAddNewItemSubscription.unsubscribe();
+      }
+      if (this.myPageInfoSubscription) {
+        this.myPageInfoSubscription.unsubscribe();
+      }
+    }
   
-  addNewItem(){
-    this.addNewItem = this.tableService.addNewItem
-  }
+  
   addNewItemDetails(){
     if(this.nameNew && this.emailNew){
       const currentDate = new Date();
@@ -87,30 +106,7 @@ export class UsersComponent implements OnInit {
     this.tableService.setIsAddNewItemValue();
   }
   getItemId(i: number){
-    console.log(this.users[i].id)
     return this.users[i].id
   }
   
-  constructor(
-    private usersService : UsersService,
-    private tableService : TableService
-    ){
-    }
-    ngOnInit(): void {
-      this.myIsAddNewItemSubscription = this.tableService.isAddNewItem$.subscribe(value => {
-        this.isAddNewItem = value;
-      });
-      this.myPageInfoSubscription = this.tableService.PageInfo$.subscribe(value => {
-        this.pageInfo = value;
-      }) 
-      this.combinedClasses = this.tableService.getCombinedClasses();
-    }
-    ngOnDestroy(): void {
-      if (this.myIsAddNewItemSubscription) {
-        this.myIsAddNewItemSubscription.unsubscribe();
-      }
-      if (this.myPageInfoSubscription) {
-        this.myPageInfoSubscription.unsubscribe();
-      }
-    }
 }

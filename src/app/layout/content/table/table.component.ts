@@ -37,16 +37,7 @@ export class TableComponent implements OnInit {
       this.pageInfo = value;
     });
   }
-  
- 
-  
-  addNewItem(){
-    this.addNewItem = this.tableService.addNewItem
-  }
-  
-  
-  
-  
+    
   nextPage() {
     this.pageInfo.totalPage = Math.floor(this.table.length / this.pageInfo.pageSize);
     let remainingItems = this.table.length % this.pageInfo.pageSize;

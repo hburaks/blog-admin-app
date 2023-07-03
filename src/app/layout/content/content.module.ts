@@ -20,7 +20,7 @@ import { FormsModule } from '@angular/forms';
     CommentsComponent,
     MainComponent,
     TableComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
   ],
   imports: [
     CommonModule,
