@@ -36,6 +36,7 @@ export class CategoriesService {
     }
   ];
   posts : Posts[] = this.postsService.getPostList();
+  isCategoryHasPost : boolean = false;
 
   constructor(
     private postsService : PostsService
@@ -68,7 +69,24 @@ export class CategoriesService {
   }
   findCategoryPosts(id : number) {
     const categoryPosts = this.posts.filter((post: Posts) => post.category_id === id);
+    if(categoryPosts.length > 0){
+      this.isCategoryHasPost = true
+    } else {
+      this.isCategoryHasPost = false
+    }
     return categoryPosts.length
+  }
+  removeItem(category : Categories) {
+    let categoryId = category.category_id
+    const index = this.categories.findIndex(item => item.category_id === categoryId);
+    this.findCategoryPosts(categoryId)
+    if (this.categories.length < 2) {
+      alert("You cannot delete the last category.");
+    } else if (this.isCategoryHasPost){
+      alert("You cannot delete a category that has posts.");
+    } else {
+      this.categories.splice(index, 1);
+    }
   }
 }
   

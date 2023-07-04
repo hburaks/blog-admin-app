@@ -1,1 +1,81 @@
 <app-table [table]="comments"></app-table>
+<div class="overlay" *ngIf="isAddNewItem">
+  <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
+    <div [ngClass]="combinedClasses">
+      <label for="post_id">Post ID:</label>
+      <input class="form-control" type="number" id="post_id" placeholder="0" [(ngModel)]="postIdNew">
+    </div>
+    <div [ngClass]="combinedClasses">
+      <label for="user_id">User ID:</label>
+      <input class="form-control" type="number" id="user_id" placeholder="0" [(ngModel)]="userIdNew">
+    </div>
+    <div [ngClass]="combinedClasses">
+      <label for="comment">Comment:</label>
+      <input class="form-control" type="text" id="comment" placeholder="comment" [(ngModel)]="commentNew">
+    </div>
+    <div [ngClass]="combinedClasses">
+      <label for="is_confirmed">Is Confirmed:</label>
+      <input class="form-check-input" type="checkbox" id="is_confirmed"name="is_confirmed" [(ngModel)]="isConfirmedNew">
+    </div>
+    <div class="container d-flex gap-2 justify-content-center">
+    <button type="button" class="btn btn-outline-success" (click)="addNewItemDetails()">Add</button>
+      <button type="button" class="btn btn-outline-danger" (click)="updateIsAddNewItemValue()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Comment ID</th>
+      <th>Post ID</th>
+      <th>User ID</th>
+      <th>Comment</th>
+      <th>Creation Date</th>
+      <th>Is Confirmed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of comments | slice : (pageInfo.pageIndex*pageInfo.pageSize) : ((pageInfo.pageIndex*pageInfo.pageSize) + pageInfo.pageSize); let i = index">
+      <td>{{item.comment_id}}</td>
+      <td>{{item.post_id}}</td>
+      <td>{{item.user_id}}</td>
+      <td>{{item.comment}}</td>
+      <td>{{item.creation_date}}</td>
+      <td>{{item.is_confirmed}}</td>
+      <div class="container d-flex gap-2">
+        <a [routerLink]="'/comments/'+ item.comment_id" class="btn btn-outline-secondary">i</a>
+        <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(item)">Edit</button>
+        <button type="button" class="btn btn-outline-danger" (click)="removeItem(item)">Remove</button>
+      </div>
+      <div class="overlay" *ngIf="isEditItem[i]">
+        <div class="container d-flex gap-2 m-3 p-3 card">
+          <div [ngClass]="combinedClasses">
+            <label for="post_id">Post ID:</label>
+            <input class="form-control" type="number" id="post_id" [value]="item.post_id" [(ngModel)]="postIdIn">
+          </div>
+          <div [ngClass]="combinedClasses">
+            <label for="user_id">User ID:</label>
+            <input class="form-control" type="number" id="user_id" [value]="item.user_id" [(ngModel)]="userIdIn">
+          </div>
+          <div [ngClass]="combinedClasses">
+            <label for="comment">Comment:</label>
+            <input class="form-control" type="text" id="comment" [value]="item.comment" [(ngModel)]="commentIn">
+          </div>
+          <div [ngClass]="combinedClasses">
+            <label for="creation_date">Creation Date:</label>
+            <input class="form-control" type="date" id="creation_date" [value]="item.creation_date" [(ngModel)]="creationDateIn">
+          </div>
+          <div [ngClass]="combinedClasses">
+            <label for="is_confirmed">Is Confirmed:</label>
+            <input class="form-check-input" type="checkbox" id="is_confirmed" name="is_confirmed" [checked]="item.is_confirmed" [(ngModel)]="isConfirmedIn">
+          </div>
+          <div class="container d-flex gap-2 justify-content-center">
+            <button type="button" class="btn btn-outline-success" (click)="editItem(item, i)">Edit</button>
+            <button type="button" class="btn btn-outline-danger" (click)="showEditItemCard(i)">Cancel</button>
+          </div>
+        </div>
+      </div>
+      </tr>
+  </tbody>
+</table>

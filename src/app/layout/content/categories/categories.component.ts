@@ -101,6 +101,10 @@ export class CategoriesComponent implements OnInit {
     getCategoryPostCount(id : number){
       return this.categoriesService.findCategoryPosts(id)
     }
+    removeItem(i : Categories) {
+      this.categoriesService.removeItem(i)
+      this.setPageInfoOnInit(this.pageInfo, this.categories)
+  }
 
 }    
 

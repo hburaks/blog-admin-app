@@ -1,0 +1,10 @@
+<div class="container d-flex justify-content-center">
+  <ul class="list-group" *ngIf="commentItem" style="width: 50vw;">
+    <li class="list-group-item"><strong>Comment ID: </strong> {{commentItem.comment_id}}</li>
+    <li class="list-group-item"><strong>Comment: </strong> {{commentItem.comment}}</li>
+    <li class="list-group-item"><strong>Post ID: </strong> {{commentItem.post_id}}</li>
+    <li class="list-group-item"><strong>User Name: </strong> {{userName}}</li>
+    <li class="list-group-item"><strong>Creation Date: </strong> {{commentItem.creation_date}}</li>
+    <li class="list-group-item"><strong>Is Confirmed: </strong> {{commentItem.is_confirmed}}</li>
+  </ul>
+</div>
