@@ -1,1 +1,51 @@
 <app-table [table]="categories"></app-table>
+<div class="overlay" *ngIf="isAddNewItem">
+  <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
+    <div [ngClass]="combinedClasses">
+      <label for="name">Category Name:</label>
+      <input class="form-control" type="text" id="name" placeholder="category name" [(ngModel)]="nameNew">
+    </div>
+    <div class="container d-flex gap-2 justify-content-center">
+      <button type="button" class="btn btn-outline-success" (click)="addNewItemDetails()">Add</button>
+      <button type="button" class="btn btn-outline-danger" (click)="updateIsAddNewItemValue()">Cancel</button>
+    </div>
+  </div>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Category ID</th>
+      <th>Name</th>
+      <th>Creation Date</th>
+      <th>Post Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of categories | slice : (pageInfo.pageIndex*pageInfo.pageSize) : ((pageInfo.pageIndex*pageInfo.pageSize) + pageInfo.pageSize); let i = index">
+      <td>{{item.category_id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.creation_date}}</td>
+      <td>{{getCategoryPostCount(item.category_id)}}</td>
+      <div class="container d-flex gap-2">
+        <a [routerLink]="'/users/'+ item.category_id" class="btn btn-outline-secondary">i</a>
+        <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(item)">Edit</button>
+      </div>
+      <div class="overlay" *ngIf="isEditItem[i]">
+        <div class="container d-flex gap-2 m-3 p-3 card">
+          <div [ngClass]="combinedClasses">
+            <label for="name">Name:</label>
+            <input class="form-control" type="text" id="name" [value]="item.name" [(ngModel)]="nameIn">
+          </div>
+          <div [ngClass]="combinedClasses">
+            <label for="creation_date">Creation Date:</label>
+            <input class="form-control" type="date" id="creation_date" [value]="item.creation_date" [(ngModel)]="creationDateIn">
+          </div>
+          <div class="container d-flex gap-2 justify-content-center">
+            <button type="button" class="btn btn-outline-success" (click)="editItem(item, i)">Edit</button>
+            <button type="button" class="btn btn-outline-danger" (click)="showEditItemCard(i)">Cancel</button>
+          </div>
+        </div>
+      </div>
+      </tr>
+  </tbody>
+</table>
