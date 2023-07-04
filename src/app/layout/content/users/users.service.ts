@@ -92,12 +92,6 @@ export class UsersService {
       is_active: isActiveIn,
     }
   }
- /* findUserPostss(user : Users){
-    const userPosts = this.posts.find((user)=> user.post_id == this.posts // here is the probleö. I want to get the post if there is a match from posts post.post_id)
-    if(userPosts.length > 0){
-      this.isUserHasPost = true
-    }
-  } */
   findUserPosts(user: Users) {
     const userPosts = this.posts.filter((post: Posts) => post.user_id === user.id);
     if (userPosts.length > 0) {
