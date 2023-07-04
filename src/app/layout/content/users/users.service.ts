@@ -68,7 +68,8 @@ export class UsersService {
     }
   }
   
-  editItem(i : number, nameIn : string, emailIn : string, creationDateIn : string, isActiveIn : boolean){
+  editItem(item : Users, nameIn : string, emailIn : string, creationDateIn : string, isActiveIn : boolean){
+    const i = item.id - 1
     this.users[i] = {
       id: i + 1,
       name: nameIn,

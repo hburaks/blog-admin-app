@@ -91,13 +91,13 @@ export class PostsComponent implements OnInit {
     this.isPublishedNew = false;
   }
 
-  removeItem(i : Posts) {
+  removeItem(item : Posts) {
     this.removeItem = this.postsService.removeItem
   }
 
-  editItem(i : number){
+  editItem( item : Posts, i : number){
     if(this.userIdIn && this.categoryIdIn && this.titleIn && this.contentIn){
-      this.postsService.editItem( i ,
+      this.postsService.editItem( item ,
         this.userIdIn,
         this.categoryIdIn,
         this.titleIn,
@@ -116,14 +116,14 @@ export class PostsComponent implements OnInit {
     this.showEditItemCard = this.tableService.showEditItemCard;
   }
 
-  updateEditInputs(i:number){
-    this.userIdIn = this.posts[i].user_id;
-    this.categoryIdIn = this.posts[i].category_id;
-    this.titleIn = this.posts[i].title;
-    this.contentIn = this.posts[i].content;
-    this.viewCountIn = this.posts[i].view_count;
-    this.creationDateIn = this.posts[i].creation_date;
-    this.isPublishedIn = this.posts[i].is_published;
+  updateEditInputs(item : Posts){
+    this.userIdIn = item.user_id;
+    this.categoryIdIn = item.category_id;
+    this.titleIn = item.title;
+    this.contentIn = item.content;
+    this.viewCountIn = item.view_count;
+    this.creationDateIn = item.creation_date;
+    this.isPublishedIn = item.is_published;
   }
   
   updateIsAddNewItemValue() {

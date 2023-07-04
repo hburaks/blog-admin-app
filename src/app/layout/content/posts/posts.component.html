@@ -59,7 +59,7 @@
       <td>{{item.is_published}}</td>
       <div class="container d-flex gap-2">
         <a [routerLink]="'/posts/'+ item.post_id" class="btn btn-outline-secondary">i</a>
-        <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(i)">Edit</button>
+        <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(item)">Edit</button>
         <button type="button" class="btn btn-outline-danger" (click)="removeItem(item)">Remove</button>
       </div>
       <div class="overlay" *ngIf="isEditItem[i]">
@@ -94,7 +94,7 @@
             <input class="form-check-input" type="checkbox" id="is_published" name="is_published" [checked]="item.is_published" [(ngModel)]="isPublishedIn">
           </div>
           <div class="container d-flex gap-2 justify-content-center">
-            <button type="button" class="btn btn-outline-success" (click)="editItem(i)">Edit</button>
+            <button type="button" class="btn btn-outline-success" (click)="editItem(item, i)">Edit</button>
             <button type="button" class="btn btn-outline-danger" (click)="showEditItemCard(i)">Cancel</button>
           </div>
         </div>

@@ -1031,17 +1031,14 @@ export class PostsService {
     })
   }
 
-  removeItem(i: Posts) {
-    let postId = i.post_id
+  removeItem(item : Posts) {
+    let postId = item.post_id
     const index = this.posts.findIndex(item => item.post_id === postId);
-    if (this.posts.length < 2) {
-      alert("You cannot delete the last user.");
-    } else {
-      this.posts.splice(index, 1);
-    }
+    this.posts.splice(index, 1);
   }
 
-  editItem(i : number, userIdIn : number, categoryIdIn : number, titleIn : string, contentIn : string , viewCountIn : number, creationDateIn : string, isPublishedIn : boolean ){
+  editItem(item : Posts, userIdIn : number, categoryIdIn : number, titleIn : string, contentIn : string , viewCountIn : number, creationDateIn : string, isPublishedIn : boolean ){
+    const i = item.post_id -1;
     this.posts[i] = {
       post_id: i + 1,
       user_id: userIdIn,

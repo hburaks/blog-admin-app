@@ -66,6 +66,7 @@ export class UsersComponent implements OnInit {
       )
       this.updateIsAddNewItemValue()
       this.clearFormFields();
+      this.setPageInfoOnInit(this.pageInfo, this.users)
     } else{
       alert("Please fill the blank input")
     }
@@ -78,9 +79,9 @@ export class UsersComponent implements OnInit {
   removeItem(i : Users) {
     this.removeItem = this.usersService.removeItem
 }
-  editItem(i : number){
+  editItem(item : Users, i : number){
       if(this.nameIn && this.emailIn && this.creationDateIn){
-        this.usersService.editItem( i ,
+        this.usersService.editItem( item ,
           this.nameIn,
           this.emailIn,
           this.creationDateIn,
@@ -92,21 +93,24 @@ export class UsersComponent implements OnInit {
       }
   }
   
+  updateEditInputs(item : Users){
+    this.nameIn = item.name;
+    this.emailIn = item.email;
+    this.creationDateIn = item.creation_date;
+    this.isActiveIn = item.is_active;
+  }
+  
   showEditItemCard(i : number){
     this.showEditItemCard = this.tableService.showEditItemCard;
   }
-  updateEditInputs(i:number){
-    this.nameIn = this.users[i].name;
-    this.emailIn = this.users[i].email;
-    this.creationDateIn = this.users[i].creation_date;
-    this.isActiveIn = this.users[i].is_active;
-  }
-  
   updateIsAddNewItemValue() {
     this.tableService.setIsAddNewItemValue();
   }
   getItemId(i: number){
     return this.users[i].id
   }
-  
+
+  setPageInfoOnInit(pageInfo : any, table : any){
+    this.tableService.setPageInfoOnInit(pageInfo, table)
+  }
 }
