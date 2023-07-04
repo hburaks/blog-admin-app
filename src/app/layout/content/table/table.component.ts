@@ -39,7 +39,6 @@ export class TableComponent implements OnInit {
     this.setPageInfoOnInit(this.pageInfo, this.table)
   }
 
-  // olmadı changesta ayrıca ilk sayfadakini  sıraya göre siliyor
   nextPage() {
     this.pageInfo.totalPageSize = Math.floor(this.table.length / this.pageInfo.pageSize);
     let remainingItems = this.table.length % this.pageInfo.pageSize;

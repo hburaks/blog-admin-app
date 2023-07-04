@@ -58,13 +58,16 @@ export class UsersService {
       is_active: isActiveNew,
     })
   }
-  removeItem(i: number) {
-    if(this.users.length < 2){
-      alert("You can not delete the last user.")
-    }else {
-      this.users.splice(i, 1);
+  removeItem(i: Users) {
+    let userId = i.id
+    const index = this.users.findIndex(item => item.id === userId);
+    if (this.users.length < 2) {
+      alert("You cannot delete the last user.");
+    }else{
+      this.users.splice(index, 1);
     }
   }
+  
   editItem(i : number, nameIn : string, emailIn : string, creationDateIn : string, isActiveIn : boolean){
     this.users[i] = {
       id: i + 1,

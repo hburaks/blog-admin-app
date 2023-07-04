@@ -91,7 +91,7 @@ export class PostsComponent implements OnInit {
     this.isPublishedNew = false;
   }
 
-  removeItem(i : number) {
+  removeItem(i : Posts) {
     this.removeItem = this.postsService.removeItem
   }
 

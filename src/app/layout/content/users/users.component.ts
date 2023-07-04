@@ -75,7 +75,7 @@ export class UsersComponent implements OnInit {
     this.emailNew = "";
     this.isActiveNew = false;
   }
-  removeItem(i : number) {
+  removeItem(i : Users) {
     this.removeItem = this.usersService.removeItem
 }
   editItem(i : number){

@@ -40,7 +40,7 @@
       <div class="container d-flex gap-2">
         <a [routerLink]="'/users/'+ item.id" class="btn btn-outline-secondary">i</a>
         <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(i)">Edit</button>
-        <button type="button" class="btn btn-outline-danger" (click)="removeItem(i)">Remove</button>
+        <button type="button" class="btn btn-outline-danger" (click)="removeItem(item)">Remove</button>
       </div>
       <div class="overlay" *ngIf="isEditItem[i]">
         <div class="container d-flex gap-2 m-3 p-3 card">

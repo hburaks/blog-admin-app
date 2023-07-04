@@ -1031,11 +1031,13 @@ export class PostsService {
     })
   }
 
-  removeItem(i: number) {
-    if(this.posts.length < 2){
-      alert("You can not delete the last user.")
-    }else {
-      this.posts.splice(i, 1);
+  removeItem(i: Posts) {
+    let postId = i.post_id
+    const index = this.posts.findIndex(item => item.post_id === postId);
+    if (this.posts.length < 2) {
+      alert("You cannot delete the last user.");
+    } else {
+      this.posts.splice(index, 1);
     }
   }
 
