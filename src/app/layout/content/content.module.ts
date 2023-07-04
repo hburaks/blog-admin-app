@@ -11,6 +11,7 @@ import { MainComponent } from './main/main.component';
 import { TableComponent } from './table/table.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { FormsModule } from '@angular/forms';
+import { PostDetailsComponent } from './posts/post-details/post-details.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     MainComponent,
     TableComponent,
     UserDetailsComponent,
+    PostDetailsComponent,
   ],
   imports: [
     CommonModule,

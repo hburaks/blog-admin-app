@@ -7,6 +7,7 @@ import { PostsComponent } from './posts/posts.component';
 import { UsersComponent } from './users/users.component';
 import { MainComponent } from './main/main.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { PostDetailsComponent } from './posts/post-details/post-details.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'categories', component : CategoriesComponent},
   {path: 'comments', component : CommentsComponent},
   {path: 'posts', component : PostsComponent},
+  {path: 'posts/:id', component : PostDetailsComponent},
   {path: 'users', component : UsersComponent},
   {path: 'users/:id', component : UserDetailsComponent},
 ];

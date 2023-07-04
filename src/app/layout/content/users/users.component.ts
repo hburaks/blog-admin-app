@@ -77,7 +77,7 @@ export class UsersComponent implements OnInit {
     this.isActiveNew = false;
   }
   removeItem(i : Users) {
-    this.removeItem = this.usersService.removeItem
+    this.usersService.removeItem(i)
     this.setPageInfoOnInit(this.pageInfo, this.users)
 }
   editItem(item : Users, i : number){
@@ -102,7 +102,7 @@ export class UsersComponent implements OnInit {
   }
   
   showEditItemCard(i : number){
-    this.showEditItemCard = this.tableService.showEditItemCard;
+   this.tableService.showEditItemCard(i);
   }
   updateIsAddNewItemValue() {
     this.tableService.setIsAddNewItemValue();
