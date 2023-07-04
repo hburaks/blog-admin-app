@@ -36,15 +36,17 @@ export class TableComponent implements OnInit {
     this.myPageInfoSubscription = this.tableService.PageInfo$.subscribe(value => {
       this.pageInfo = value;
     });
+    this.setPageInfoOnInit(this.pageInfo, this.table)
   }
-    
+
+  // olmadı changesta ayrıca ilk sayfadakini  sıraya göre siliyor
   nextPage() {
-    this.pageInfo.totalPage = Math.floor(this.table.length / this.pageInfo.pageSize);
+    this.pageInfo.totalPageSize = Math.floor(this.table.length / this.pageInfo.pageSize);
     let remainingItems = this.table.length % this.pageInfo.pageSize;
     if (remainingItems > 0) {
-      this.pageInfo.totalPage++;
+      this.pageInfo.totalPageSize++;
     }
-    if (this.pageInfo.pageIndex + 1 < this.pageInfo.totalPage) {
+    if (this.pageInfo.pageIndex + 1 < this.pageInfo.totalPageSize) {
       this.pageInfo.pageIndex++;
       this.updateQueryParam('p', this.pageInfo.pageIndex + 1);
     }
@@ -72,6 +74,10 @@ export class TableComponent implements OnInit {
   
   setPageInfo(totalPageSize : number){
     this.tableService.setPageInfo(totalPageSize)
+  }
+
+  setPageInfoOnInit(pageInfo : any, table : any){
+    this.tableService.setPageInfoOnInit(pageInfo, table)
   }
   
 }

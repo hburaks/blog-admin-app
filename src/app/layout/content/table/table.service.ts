@@ -12,13 +12,17 @@ export class TableService {
   private pageInfoSubject: BehaviorSubject<any> = new BehaviorSubject<any>({
     pageIndex: 0,
     pageSize: 10,
-    totalPageSize: 0
+    totalPageSize: 1
   });
   get PageInfo$(){
     return this.pageInfoSubject.asObservable();
   }
-  setPageInfo(totalPageSize : number){
-    this.pageInfoSubject.next(totalPageSize)
+  
+  setPageInfo(totalPageSize: number) {
+    this.pageInfoSubject.next({
+      ...this.pageInfoSubject.value,
+      totalPageSize: totalPageSize
+    });
   }
 
   private isAddNewItemSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -41,6 +45,14 @@ export class TableService {
   getCombinedClasses(): string {
     this.combinedClasses = 'container d-flex align-items-center gap-2 justify-content-between';
     return this.combinedClasses;
+  }
+
+  setPageInfoOnInit(pageInfo : any, table : any){
+    pageInfo.totalPageSize = Math.floor(table.length / pageInfo.pageSize);
+    let remainingItems = table.length % pageInfo.pageSize;
+    if (remainingItems > 0) {
+      pageInfo.totalPageSize++;
+    }
   }
   
 }

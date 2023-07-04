@@ -75,6 +75,8 @@ export class PostsComponent implements OnInit {
       )
       this.updateIsAddNewItemValue()
       this.clearFormFields();
+      this.setPageInfoOnInit(this.pageInfo, this.posts)
+
     } else{
       alert("Please fill the blank input")
     }
@@ -131,7 +133,9 @@ export class PostsComponent implements OnInit {
     return this.posts[i].post_id
   }
 
-  
+  setPageInfoOnInit(pageInfo : any, table : any){
+    this.tableService.setPageInfoOnInit(pageInfo, table)
+  }
 }
 
 

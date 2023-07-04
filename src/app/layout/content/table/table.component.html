@@ -1,8 +1,8 @@
 <div class="container d-flex  m-2 ">
   <button type="button" class="btn btn-outline-success" style="width: 150px; height: 36px;" (click)="updateIsAddNewItemValue()">Add New Item</button>
   <div class="container d-flex align-items-center gap-2 justify-content-end">
-    <p style="margin-bottom: 0px; margin-right: 30px;">{{pageInfo.pageIndex + 1}} / {{pageInfo.totalPageSize + 1}}</p>
+    <p style="margin-bottom: 0px; margin-right: 30px;">{{pageInfo.pageIndex + 1}} / {{pageInfo.totalPageSize}}</p>
     <button class="btn btn-light" (click)="prevPage()" [disabled]="pageInfo.pageIndex === 0"  ><</button>
-    <button class="btn btn-light" (click)="nextPage()" [disabled]="pageInfo.pageIndex === pageInfo.totalPageSize ">></button>
+    <button class="btn btn-light" (click)="nextPage()" [disabled]="pageInfo.pageIndex === pageInfo.totalPageSize -1">></button>
   </div>
 </div>
