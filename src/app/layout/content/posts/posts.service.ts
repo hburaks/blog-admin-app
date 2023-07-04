@@ -1019,8 +1019,14 @@ export class PostsService {
   }
 
   addNewItemDetails(userIdNew : number, categoryIdNew : number, titleNew : string, contentNew : string , viewCountNew : number, creationDateNew : string, isPublishedNew : boolean ){
+    let minAvailablePostId = 1;
+    const usedPostIds = this.posts.map((post) => post.post_id);
+    while (usedPostIds.includes(minAvailablePostId)) {
+      minAvailablePostId++;
+    }
+
     this.posts.push({
-      post_id: this.posts.length + 1,
+      post_id: minAvailablePostId,
       user_id: userIdNew,
       category_id: categoryIdNew,
       title: titleNew,

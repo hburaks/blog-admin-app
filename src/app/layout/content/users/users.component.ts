@@ -78,6 +78,7 @@ export class UsersComponent implements OnInit {
   }
   removeItem(i : Users) {
     this.removeItem = this.usersService.removeItem
+    this.setPageInfoOnInit(this.pageInfo, this.users)
 }
   editItem(item : Users, i : number){
       if(this.nameIn && this.emailIn && this.creationDateIn){

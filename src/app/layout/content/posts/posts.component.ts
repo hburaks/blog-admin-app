@@ -49,6 +49,7 @@ export class PostsComponent implements OnInit {
       this.pageInfo = value;
     }) 
     this.combinedClasses = this.tableService.getCombinedClasses();
+    this.setPageInfoOnInit(this.pageInfo, this.posts)    
   }
 
   ngOnDestroy(): void {
@@ -76,7 +77,6 @@ export class PostsComponent implements OnInit {
       this.updateIsAddNewItemValue()
       this.clearFormFields();
       this.setPageInfoOnInit(this.pageInfo, this.posts)
-
     } else{
       alert("Please fill the blank input")
     }
@@ -92,7 +92,8 @@ export class PostsComponent implements OnInit {
   }
 
   removeItem(item : Posts) {
-    this.removeItem = this.postsService.removeItem
+    this.postsService.removeItem(item);
+    this.setPageInfoOnInit(this.pageInfo, this.posts)
   }
 
   editItem( item : Posts, i : number){

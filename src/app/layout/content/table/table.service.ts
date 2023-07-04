@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,8 @@ export class TableService {
   }
   
   setPageInfo(totalPageSize: number) {
+
+
     this.pageInfoSubject.next({
       ...this.pageInfoSubject.value,
       totalPageSize: totalPageSize
@@ -48,10 +50,13 @@ export class TableService {
   }
 
   setPageInfoOnInit(pageInfo : any, table : any){
-    pageInfo.totalPageSize = Math.floor(table.length / pageInfo.pageSize);
+    let pageSize = Math.floor(table.length / pageInfo.pageSize);
     let remainingItems = table.length % pageInfo.pageSize;
     if (remainingItems > 0) {
-      pageInfo.totalPageSize++;
+      pageSize++;
+      this.setPageInfo(pageSize)
+    } else{
+      this.setPageInfo(pageSize)
     }
   }
   
