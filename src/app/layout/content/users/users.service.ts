@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Users } from './users';
+import { PostsService } from '../posts/posts.service';
+import { Posts } from '../posts/posts';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +44,12 @@ export class UsersService {
       is_active: true
     }
   ];
-  constructor() { }
+  posts : Posts[] = this.postsService.getPostList();
+  isUserHasPost : boolean = false;
+
+  constructor(
+    private postsService : PostsService
+  ) { }
   getUserList(){
     return this.users
   }
@@ -55,7 +62,6 @@ export class UsersService {
     while (usedPostIds.includes(minAvailablePostId)) {
       minAvailablePostId++;
     }
-
     this.users.push({
       id: minAvailablePostId,
       name: nameNew,
@@ -64,16 +70,18 @@ export class UsersService {
       is_active: isActiveNew,
     })
   }
-  removeItem(i: Users) {
-    let userId = i.id
+  removeItem(user : Users) {
+    let userId = user.id
     const index = this.users.findIndex(item => item.id === userId);
+    this.findUserPosts(user)
     if (this.users.length < 2) {
       alert("You cannot delete the last user.");
-    }else{
+    } else if (this.isUserHasPost){
+      alert("You cannot delete a user that has posts.");
+    } else {
       this.users.splice(index, 1);
     }
   }
-  
   editItem(item : Users, nameIn : string, emailIn : string, creationDateIn : string, isActiveIn : boolean){
     const i = item.id - 1
     this.users[i] = {
@@ -82,6 +90,20 @@ export class UsersService {
       email: emailIn,
       creation_date: creationDateIn,
       is_active: isActiveIn,
+    }
+  }
+ /* findUserPostss(user : Users){
+    const userPosts = this.posts.find((user)=> user.post_id == this.posts // here is the probleö. I want to get the post if there is a match from posts post.post_id)
+    if(userPosts.length > 0){
+      this.isUserHasPost = true
+    }
+  } */
+  findUserPosts(user: Users) {
+    const userPosts = this.posts.filter((post: Posts) => post.user_id === user.id);
+    if (userPosts.length > 0) {
+      this.isUserHasPost = true;
+    } else {
+      this.isUserHasPost = false;
     }
   }
 }
