@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Users } from './users';
 import { PostsService } from '../posts/posts.service';
 import { Posts } from '../posts/posts';
+import { CommentsService } from '../comments/comments.service';
+import { Comments } from '../comments/comments';
 
 @Injectable({
   providedIn: 'root'
@@ -46,9 +48,12 @@ export class UsersService {
   ];
   posts : Posts[] = this.postsService.getPostList();
   isUserHasPost : boolean = false;
+  comments : Comments[] = this.commentsService.getCommentsList();
+  isUserHasComment : boolean = false;
 
   constructor(
-    private postsService : PostsService
+    private postsService : PostsService,
+    private commentsService : CommentsService
   ) { }
   getUserList(){
     return this.users
@@ -74,10 +79,13 @@ export class UsersService {
     let userId = user.id
     const index = this.users.findIndex(item => item.id === userId);
     this.findUserPosts(user)
+    this.findUserComments(user)
     if (this.users.length < 2) {
       alert("You cannot delete the last user.");
     } else if (this.isUserHasPost){
       alert("You cannot delete a user that has posts.");
+    } else if (this.isUserHasComment){
+      alert("You cannot delete a user that has comments.");
     } else {
       this.users.splice(index, 1);
     }
@@ -98,6 +106,14 @@ export class UsersService {
       this.isUserHasPost = true;
     } else {
       this.isUserHasPost = false;
+    }
+  }
+  findUserComments(user: Users) {
+    const userComments = this.comments.filter((comment: Comments) => comment.user_id === user.id);
+    if (userComments.length > 0) {
+      this.isUserHasComment = true;
+    } else {
+      this.isUserHasComment = false;
     }
   }
 }
