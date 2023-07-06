@@ -4046,6 +4046,9 @@ export class CommentsService {
       is_confirmed: isConfirmedIn,
     }
   }
+  navigateToCommentsPage() {
+    window.location.href = '/comments';
+  }
 }
 
 

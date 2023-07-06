@@ -1,4 +1,5 @@
 <app-table [table]="comments"></app-table>
+
 <div class="overlay" *ngIf="isAddNewItem">
   <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
     <div [ngClass]="combinedClasses">
@@ -33,6 +34,9 @@
       <th>Comment</th>
       <th>Creation Date</th>
       <th>Is Confirmed</th>
+      <div class="container d-flex justify-content-end">
+        <a class="btn btn-outline-secondary" [routerLink]="'/comments'" *ngIf="isCommentsFiltered"  (click)="filterByPostId(); toggleFilter()">Back</a>
+      </div>
     </tr>
   </thead>
   <tbody>
@@ -44,6 +48,7 @@
       <td>{{item.creation_date}}</td>
       <td>{{item.is_confirmed}}</td>
       <div class="container d-flex gap-2">
+        <a class="btn btn-outline-secondary" [routerLink]="'/comments'" *ngIf="!isCommentsFiltered" [queryParams]="{postId: item.post_id}" (click)="filterByPostId(); toggleFilter()">Filtre</a>
         <a [routerLink]="'/comments/'+ item.comment_id" class="btn btn-outline-secondary">i</a>
         <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(item)">Edit</button>
         <button type="button" class="btn btn-outline-danger" (click)="removeItem(item)">Remove</button>
@@ -78,4 +83,5 @@
       </div>
       </tr>
   </tbody>
+  
 </table>

@@ -2,12 +2,16 @@
 <div class="overlay" *ngIf="isAddNewItem">
   <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
     <div [ngClass]="combinedClasses">
-      <label for="user_id">User ID:</label>
-      <input class="form-control" type="number" id="user_id" placeholder="0" [(ngModel)]="userIdNew">
+      <label for="user_id">User ID: {{userIdNew}}</label>
+      <select class="form-control" style="width: 225px" id="user_id" [(ngModel)]="userIdNew">
+        <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+      </select>
     </div>
     <div [ngClass]="combinedClasses">
-      <label for="category_id">Category ID:</label>
-      <input class="form-control" type="number" id="category_id" placeholder="0" [(ngModel)]="categoryIdNew">
+      <label for="category_id">Category ID: {{categoryIdNew}}</label>
+      <select class="form-control" style="width: 225px" id="category_id" [(ngModel)]="categoryIdNew">
+        <option *ngFor="let category of categories" [value]="category.category_id">{{ category.name }}</option>
+      </select>
     </div>
     <div [ngClass]="combinedClasses">
       <label for="title">Title:</label>
@@ -26,18 +30,19 @@
       <input class="form-check-input" type="checkbox" id="is_published"name="is_published" [(ngModel)]="isPublishedNew">
     </div>
     <div class="container d-flex gap-2 justify-content-center">
-    <button type="button" class="btn btn-outline-success" (click)="addNewItemDetails()">Add</button>
+    <button type="submit" class="btn btn-outline-success" (click)="addNewItemDetails()">Add</button>
       <button type="button" class="btn btn-outline-danger" (click)="updateIsAddNewItemValue()">Cancel</button>
     </div>
   </div>
 </div>
 
+
 <table class="table">
   <thead>
     <tr>
-      <th>Post ID</th>
-      <th>User ID</th>
-      <th>Category ID</th>
+      <th>ID</th>
+      <th>User</th>
+      <th>Category</th>
       <th>Title</th>
       <th>View Count</th>
       <th>Creation Date</th>
@@ -47,8 +52,8 @@
   <tbody>
     <tr *ngFor="let item of posts | slice : (pageInfo.pageIndex*pageInfo.pageSize) : ((pageInfo.pageIndex*pageInfo.pageSize) + pageInfo.pageSize); let i = index">
       <td>{{item.post_id}}</td>
-      <td>{{item.user_id}}</td>
-      <td>{{item.category_id}}</td>
+      <td>{{matchUserIdWithName(item.user_id)}}</td>
+      <td>{{matchCategoryIdWithName(item.user_id)}}</td>
       <td>{{item.title}}</td>
       <td>{{item.view_count}}</td>
       <td>{{item.creation_date}}</td>
@@ -61,12 +66,16 @@
       <div class="overlay" *ngIf="isEditItem[i]">
         <div class="container d-flex gap-2 m-3 p-3 card">
           <div [ngClass]="combinedClasses">
-            <label for="user_id">User ID:</label>
-            <input class="form-control" type="number" id="user_id" [value]="item.user_id" [(ngModel)]="userIdIn">
+            <label for="user_id">User ID: {{userIdIn}}</label>
+            <select class="form-control" style="width: 225px" id="user_id" [(ngModel)]="userIdIn">
+              <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+            </select>
           </div>
           <div [ngClass]="combinedClasses">
-            <label for="category_id">Category ID:</label>
-            <input class="form-control" type="number" id="category_id" [value]="item.category_id" [(ngModel)]="categoryIdIn">
+            <label for="category_id">Category ID: {{categoryIdIn}}</label>
+            <select class="form-control" style="width: 225px" id="category_id" [(ngModel)]="categoryIdIn">
+              <option *ngFor="let category of categories" [value]="category.category_id">{{ category.name }}</option>
+            </select>
           </div>
           <div [ngClass]="combinedClasses">
             <label for="title">Title:</label>

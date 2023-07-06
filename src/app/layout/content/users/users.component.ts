@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  tableIdName: string = 'users.id';
   users : Users[] = this.usersService.getUserList();
   isEditItem : boolean[] = this.tableService.getIsEditItem();
   isAddNewItem: boolean = false;

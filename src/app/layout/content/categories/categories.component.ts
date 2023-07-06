@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  tableIdName: string = 'categories.category_id';
   categories : Categories[] = this.categoriesService.getCategoryList();
   isEditItem : boolean[] = this.tableService.getIsEditItem();
   isAddNewItem: boolean = false;

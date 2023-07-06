@@ -18,5 +18,9 @@ export class UserDetailsComponent {
     const userItemId = Number(params['id']); 
     this.userItem = this.usersService.getUser(userItemId)
   }
+
+  navigateToUserPage(){
+    this.usersService.navigateToUserPage()
+  }
 }
 

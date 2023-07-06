@@ -48,6 +48,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .btn {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+.shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+
+}
 .overlay {
   position: fixed;
   top: 0;

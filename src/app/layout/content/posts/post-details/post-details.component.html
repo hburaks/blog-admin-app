@@ -1,3 +1,4 @@
+<div class="container shadow p-5">
 <div class="container d-flex justify-content-center">
   <ul class="list-group" *ngIf="postItem" style="width: 50vw;">
     <li class="list-group-item"><strong>ID: </strong> {{postItem.post_id}}</li>
@@ -9,4 +10,30 @@
     <li class="list-group-item"><strong>Is Published: </strong> {{postItem.is_published}}</li>
     <li class="list-group-item"><strong>View Count: </strong> {{postItem.view_count}}</li>
   </ul>
+</div>
+  <div class="text-center mt-5"><strong>Comments for the Post</strong> <p> Count : {{comments.length}}</p></div>
+  <table *ngIf="comments.length >= 1" class="table mt-2">
+    <thead>
+      <tr>
+        <th>Comment ID</th>
+        <th>User ID</th>
+        <th>Comment</th>
+        <th>Creation Date</th>
+        <th>Is Confirmed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of comments ; let i = index">
+        <td>{{item.comment_id}}</td>
+        <td>{{item.user_id}}</td>
+        <td>{{item.comment}}</td>
+        <td>{{item.creation_date}}</td>
+        <td>{{item.is_confirmed}}</td>
+        <div class="container d-flex gap-2">
+          <a [routerLink]="'/comments/'+ item.comment_id" class="btn btn-outline-secondary">i</a>
+        </div>
+        </tr>
+    </tbody>
+  </table>  
+  <div *ngIf="comments.length < 1" class="mt-2 text-center">No comments on this post.</div>
 </div>

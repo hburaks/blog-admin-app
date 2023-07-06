@@ -3,6 +3,10 @@ import { Posts } from './posts';
 import { PostsService } from './posts.service';
 import { TableService } from '../table/table.service';
 import { Subscription } from 'rxjs';
+import { Users } from '../users/users';
+import { UsersService } from '../users/users.service';
+import { CategoriesService } from '../categories/categories.service';
+import { Categories } from '../categories/categories';
 
 @Component({
   selector: 'app-posts',
@@ -10,13 +14,15 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-  tableIdName: string = 'posts.post_id';
   posts : Posts[] = this.postsService.getPostList();
   isEditItem : boolean[] = this.tableService.getIsEditItem();
   isAddNewItem: boolean = false;
   myIsAddNewItemSubscription: Subscription | undefined;
   pageInfo : any = {}
   myPageInfoSubscription : Subscription | undefined;
+  users : Users[] = this.usersService.getUserList();
+  categories : Categories[] = this.categoriesService.getCategoryList();
+
 
   combinedClasses: string = "";
 
@@ -37,7 +43,9 @@ export class PostsComponent implements OnInit {
 
   constructor(
     private postsService : PostsService,
-    private tableService : TableService
+    private tableService : TableService,
+    private usersService : UsersService,
+    private categoriesService : CategoriesService
   ){
   }
 
@@ -136,6 +144,12 @@ export class PostsComponent implements OnInit {
 
   setPageInfoOnInit(pageInfo : any, table : any){
     this.tableService.setPageInfoOnInit(pageInfo, table)
+  }
+  matchUserIdWithName(id : number){
+    return this.usersService.matchUserIdWithName(id);
+  }
+  matchCategoryIdWithName(id : number){
+    return this.categoriesService.matchCategoryIdWithName(id)
   }
 }
 

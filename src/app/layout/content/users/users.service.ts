@@ -116,4 +116,15 @@ export class UsersService {
       this.isUserHasComment = false;
     }
   }
+  navigateToUserPage() {
+    window.location.href = '/users';
+  }
+  matchUserIdWithName(id : number){
+    for(let i = 0; i < this.users.length; i++){
+      if(this.users[i].id == id){
+        return this.users[i].name;
+      } 
+    }
+    return 0
+  }
 }

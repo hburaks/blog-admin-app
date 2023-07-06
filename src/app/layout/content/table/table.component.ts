@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs';
 })
 export class TableComponent implements OnInit {
   @Input() table!: any[];
-  @Input() tableIdName!: string;
 
 
   pageInfo : any = {}

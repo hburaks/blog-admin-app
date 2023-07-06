@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Posts } from './posts';
+import { CommentsService } from '../comments/comments.service';
+import { Comments } from '../comments/comments';
 
 @Injectable({
   providedIn: 'root'
@@ -1007,8 +1009,12 @@ export class PostsService {
       is_published: false
     }
   ]
+  isPostHasComments : boolean = false;
+  comments : Comments[] = this.commentsService.getCommentsList();
 
-  constructor() { }
+  constructor(
+    private commentsService : CommentsService
+  ) { }
 
   getPostList(){
     return this.posts
@@ -1040,7 +1046,12 @@ export class PostsService {
   removeItem(item : Posts) {
     let postId = item.post_id
     const index = this.posts.findIndex(item => item.post_id === postId);
-    this.posts.splice(index, 1);
+    this.findPostComments(item)
+    if(this.isPostHasComments){
+      alert("You cannot delete a post that has comments.");
+    } else {
+      this.posts.splice(index, 1);
+    }
   }
 
   editItem(item : Posts, userIdIn : number, categoryIdIn : number, titleIn : string, contentIn : string , viewCountIn : number, creationDateIn : string, isPublishedIn : boolean ){
@@ -1056,11 +1067,13 @@ export class PostsService {
       is_published: isPublishedIn,
     }
   }
+  findPostComments(post: Posts) {
+    const postComments = this.comments.filter((comment: Comments) => comment.post_id === post.post_id);
+    if (postComments.length > 0) {
+      this.isPostHasComments = true;
+    } else {
+      this.isPostHasComments = false;
+    }
+  }
+
 }
-
-
-  
-  
-  
-  
- 

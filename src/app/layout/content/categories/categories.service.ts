@@ -88,6 +88,14 @@ export class CategoriesService {
       this.categories.splice(index, 1);
     }
   }
+  matchCategoryIdWithName(id : number){
+    for(let i = 0; i < this.categories.length; i++){
+      if(this.categories[i].category_id == id){
+        return this.categories[i].name;
+      } 
+    }
+    return 0
+  }
 }
   
   

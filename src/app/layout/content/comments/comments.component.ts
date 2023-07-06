@@ -3,6 +3,7 @@ import { Comments } from './comments';
 import { CommentsService } from './comments.service';
 import { TableService } from '../table/table.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-comments',
@@ -10,14 +11,16 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
-  tableIdName: string = 'comments.comment_id';
   comments : Comments[] = this.commentsService.getCommentsList();
+  filteredComments: Comments[] = [];
+  postIdFilter: number = 0;
   isEditItem : boolean[] = this.tableService.getIsEditItem();
   isAddNewItem: boolean = false;
   myIsAddNewItemSubscription: Subscription | undefined;
   pageInfo : any = {}
   myPageInfoSubscription : Subscription | undefined;
   combinedClasses: string = "";
+  isCommentsFiltered : boolean = false;
 
   postIdNew : number = 0;
   userIdNew : number = 0;
@@ -32,7 +35,8 @@ export class CommentsComponent implements OnInit {
   
   constructor(
     private commentsService : CommentsService,
-    private tableService : TableService
+    private tableService : TableService,
+    private route: ActivatedRoute
   ){
   }
 
@@ -43,9 +47,19 @@ export class CommentsComponent implements OnInit {
     this.myPageInfoSubscription = this.tableService.PageInfo$.subscribe(value => {
       this.pageInfo = value;
     }) 
+    this.route.queryParams.subscribe(params => {
+      const postId = params['postId'];
+    });
+    this.comments = this.commentsService.getCommentsList();
+    this.route.queryParams.subscribe(params => {
+      this.postIdFilter = parseInt(params['postId']);
+      this.filterByPostId();
+    });
     this.combinedClasses = this.tableService.getCombinedClasses();
-    this.setPageInfoOnInit(this.pageInfo, this.comments)    
+    this.setPageInfoOnInit(this.pageInfo, this.comments)
+    this.isCommentsFiltered = false;
   }
+  
   ngOnDestroy(): void {
     if (this.myIsAddNewItemSubscription) {
       this.myIsAddNewItemSubscription.unsubscribe();
@@ -54,6 +68,8 @@ export class CommentsComponent implements OnInit {
       this.myPageInfoSubscription.unsubscribe();
     }
   }
+
+  
 
   addNewItemDetails(){
     if(this.userIdNew && this.postIdNew && this.commentNew){
@@ -117,6 +133,20 @@ export class CommentsComponent implements OnInit {
   setPageInfoOnInit(pageInfo : any, table : any){
     this.tableService.setPageInfoOnInit(pageInfo, table)
   }  
+  toggleFilter(){
+      this.isCommentsFiltered = !this.isCommentsFiltered
+  }
+  
+  filterByPostId(): void {
+    if (this.postIdFilter > 0) {
+      this.comments = this.comments.filter(comment => comment.post_id === this.postIdFilter);
+      this.setPageInfoOnInit(this.pageInfo, this.comments)
+    } else {
+      this.comments = this.commentsService.getCommentsList();
+      this.setPageInfoOnInit(this.pageInfo, this.comments)
+    }
+  }
+  
 }
 
   
