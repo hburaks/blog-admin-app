@@ -9,9 +9,10 @@
     <li class="list-group-item"><strong>Creation Date: </strong> {{postItem.creation_date}}</li>
     <li class="list-group-item"><strong>Is Published: </strong> {{postItem.is_published}}</li>
     <li class="list-group-item"><strong>View Count: </strong> {{postItem.view_count}}</li>
+    <li class="list-group-item"><strong>Comment Count : </strong> {{comments.length}}</li>
   </ul>
 </div>
-  <div class="text-center mt-5"><strong>Comments for the Post</strong> <p> Count : {{comments.length}}</p></div>
+  <div class="text-center mt-5"><strong>Comments for the Post</strong></div>
   <table *ngIf="comments.length >= 1" class="table mt-2">
     <thead>
       <tr>
