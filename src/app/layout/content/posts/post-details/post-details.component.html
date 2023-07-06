@@ -2,10 +2,10 @@
 <div class="container d-flex justify-content-center">
   <ul class="list-group" *ngIf="postItem" style="width: 50vw;">
     <li class="list-group-item"><strong>ID: </strong> {{postItem.post_id}}</li>
-    <li class="list-group-item"><strong>Category: </strong> {{categoryName}}</li>
+    <li class="list-group-item"><strong>Category: </strong> {{matchCategoryIdWithName(postItem.user_id)}}</li>
     <li class="list-group-item"><strong>Title: </strong> {{postItem.title}}</li>
     <li class="list-group-item"><strong>Content: </strong> {{postItem.content}}</li>
-    <li class="list-group-item"><strong>User Name: </strong> {{userName}}</li>
+    <li class="list-group-item"><strong>User Name: </strong> {{matchUserIdWithName(postItem.user_id)}}</li>
     <li class="list-group-item"><strong>Creation Date: </strong> {{postItem.creation_date}}</li>
     <li class="list-group-item"><strong>Is Published: </strong> {{postItem.is_published}}</li>
     <li class="list-group-item"><strong>View Count: </strong> {{postItem.view_count}}</li>

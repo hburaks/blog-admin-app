@@ -17,8 +17,6 @@ import { Comments } from '../../comments/comments';
 })
 export class PostDetailsComponent implements OnInit {
   postItem? : Posts;
-  userName : String = "";
-  categoryName : String = "";
   posts : Posts[] = this.postsService.getPostList();
   categories : Categories[] = this.categoriesService.getCategoryList();
   pageInfo : any = {}
@@ -36,8 +34,6 @@ export class PostDetailsComponent implements OnInit {
     const params = this.route.snapshot.params
     const postItemId = Number(params['id']); 
     this.postItem = this.postsService.getPost(postItemId)
-    this.findUserName(postItemId)
-    this.findCategoryName(postItemId)
     this.filterCommentsMatched(postItemId)
   }
   ngOnInit(): void {
@@ -45,33 +41,14 @@ export class PostDetailsComponent implements OnInit {
       this.pageInfo = value;
     }) 
   }
-
-  findUserName( post_id : number){
-    const post = this.posts.find((p)=> p.post_id === post_id)
-    if (post) {
-      const user_id = post.user_id;
-      const user = this.usersService.getUser(user_id);
-      if (user) {
-        this.userName = user.name;
-      }
-    }
-  }
-  findCategoryName( post_id : number){
-    this.categories = this.categoriesService.getCategoryList();
-    const post = this.posts.find((p)=> p.post_id === post_id)
-    if (post) {
-      const category_id = post.category_id;
-      const category = this.categoriesService.getCategory(category_id);
-      if (category) {
-        this.categoryName = category.name;
-      }
-    }
-  }
-
   filterCommentsMatched(id : number){
     this.comments = this.comments.filter(comment => comment.post_id === id);
   }
-
-
+  matchUserIdWithName(id : number){
+    return this.usersService.matchUserIdWithName(id);
+  }
+  matchCategoryIdWithName(id : number){
+    return this.categoriesService.matchCategoryIdWithName(id)
+  }
 }
 
