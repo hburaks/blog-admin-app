@@ -4036,7 +4036,7 @@ export class CommentsService {
     this.comments.splice(index, 1);
   }
   editItem(item : Comments, postIdIn : number, userIdIn : number,  commentIn : string, creationDateIn : string, isConfirmedIn : boolean ){
-    const i = item.post_id -1;
+    const i = item.comment_id -1;
     this.comments[i] = {
       comment_id: i + 1,
       post_id: postIdIn,

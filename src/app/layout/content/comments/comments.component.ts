@@ -114,7 +114,7 @@ export class CommentsComponent implements OnInit {
     }
   }
   showEditItemCard(i : number){
-    this.showEditItemCard = this.tableService.showEditItemCard;
+    this.tableService.showEditItemCard(i);
   }
   updateEditInputs(item : Comments){
     this.postIdIn = item.post_id;
@@ -134,7 +134,7 @@ export class CommentsComponent implements OnInit {
     this.tableService.setPageInfoOnInit(pageInfo, table)
   }  
   toggleFilter(){
-      this.isCommentsFiltered = !this.isCommentsFiltered
+    this.isCommentsFiltered = !this.isCommentsFiltered
   }
   
   filterByPostId(): void {

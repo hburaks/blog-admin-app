@@ -7,7 +7,6 @@ import { UsersComponent } from './users/users.component';
 import { PostsComponent } from './posts/posts.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CommentsComponent } from './comments/comments.component';
-import { MainComponent } from './main/main.component';
 import { TableComponent } from './table/table.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { FormsModule } from '@angular/forms';
@@ -20,7 +19,6 @@ import { CommentDetailsComponent } from './comments/comment-details/comment-deta
     PostsComponent,
     CategoriesComponent,
     CommentsComponent,
-    MainComponent,
     TableComponent,
     UserDetailsComponent,
     PostDetailsComponent,

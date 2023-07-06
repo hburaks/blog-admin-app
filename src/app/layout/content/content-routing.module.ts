@@ -5,14 +5,12 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CommentsComponent } from './comments/comments.component';
 import { PostsComponent } from './posts/posts.component';
 import { UsersComponent } from './users/users.component';
-import { MainComponent } from './main/main.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { PostDetailsComponent } from './posts/post-details/post-details.component';
 import { CommentDetailsComponent } from './comments/comment-details/comment-details.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
-  {path: 'main', component : MainComponent},
+  { path: '', component: PostsComponent },
   {path: 'categories', component : CategoriesComponent},
   {path: 'comments', component : CommentsComponent},
   {path: 'comments/:id', component : CommentDetailsComponent},
