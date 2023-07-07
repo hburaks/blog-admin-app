@@ -26,9 +26,10 @@
       <td>{{item.name}}</td>
       <td>{{item.creation_date}}</td>
       <td>{{getCategoryPostCount(item.category_id)}}</td>
-      <div class="container d-flex gap-2">
+      <div class="container d-flex gap-2 justify-content-end">
         <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(item)">Edit</button>
         <button type="button" class="btn btn-outline-danger" (click)="removeItem(item)">Remove</button>
+        <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/posts']" [queryParams]="{categoryId: item.category_id}">View Posts</a>
       </div>
       <div class="overlay" *ngIf="isEditItem[i]">
         <div class="container d-flex gap-2 m-3 p-3 card">

@@ -45,6 +45,7 @@ $patikaodev02-angular-theme: mat.define-light-theme((
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 .btn {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -68,6 +69,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .card {
   z-index: 9999;
+  max-height: 80vh;
+  max-width: 50vh !important;
+  overflow-y: auto;
 }
 input {
   max-width: 14rem !important;

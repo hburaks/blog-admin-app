@@ -7,6 +7,7 @@ import { Users } from '../users/users';
 import { UsersService } from '../users/users.service';
 import { CategoriesService } from '../categories/categories.service';
 import { Categories } from '../categories/categories';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-posts',
@@ -15,6 +16,8 @@ import { Categories } from '../categories/categories';
 })
 export class PostsComponent implements OnInit {
   posts : Posts[] = this.postsService.getPostList();
+  defaultPosts : Posts[] = this.postsService.getPostList();
+
   isEditItem : boolean[] = this.tableService.getIsEditItem();
   isAddNewItem: boolean = false;
   myIsAddNewItemSubscription: Subscription | undefined;
@@ -22,6 +25,7 @@ export class PostsComponent implements OnInit {
   myPageInfoSubscription : Subscription | undefined;
   users : Users[] = this.usersService.getUserList();
   categories : Categories[] = this.categoriesService.getCategoryList();
+
 
 
   combinedClasses: string = "";
@@ -41,15 +45,28 @@ export class PostsComponent implements OnInit {
   creationDateIn : string = "";
   isPublishedIn : boolean = false; 
 
+  userIdFilter : string | null = null;
+  postIdFilter : string | null = null;
+  categoryIdFilter : string | null = null;
+
+
   constructor(
     private postsService : PostsService,
     private tableService : TableService,
     private usersService : UsersService,
-    private categoriesService : CategoriesService
+    private categoriesService : CategoriesService,
+    private router: Router,
+    private route : ActivatedRoute
   ){
   }
-
+  
   ngOnInit(): void {
+    this.posts = this.postsService.getPostList();
+    this.route.queryParamMap.subscribe(params => {
+      this.userIdFilter = params.get('userId') || '';
+      this.postIdFilter = params.get('postId') || '';
+      this.categoryIdFilter = params.get('categoryId') || '';
+    });
     this.myIsAddNewItemSubscription = this.tableService.isAddNewItem$.subscribe(value => {
       this.isAddNewItem = value;
     });
@@ -58,6 +75,7 @@ export class PostsComponent implements OnInit {
     }) 
     this.combinedClasses = this.tableService.getCombinedClasses();
     this.setPageInfoOnInit(this.pageInfo, this.posts)    
+    this.applyFilters();
   }
 
   ngOnDestroy(): void {
@@ -67,6 +85,48 @@ export class PostsComponent implements OnInit {
     if (this.myPageInfoSubscription) {
       this.myPageInfoSubscription.unsubscribe();
     }
+  }
+
+  getFilteredPosts(userId: string | null, postId: string | null, categoryId: string | null): Posts[] {
+    let filteredPosts = this.postsService.getPostList();
+  
+    if (userId) {
+      filteredPosts = filteredPosts.filter(post => post.user_id === parseInt(userId));
+    }
+  
+    if (postId) {
+      filteredPosts = filteredPosts.filter(post => post.post_id === parseInt(postId));
+    }
+  
+    if (categoryId) {
+      filteredPosts = filteredPosts.filter(post => post.category_id === parseInt(categoryId));
+    }
+  
+    return filteredPosts;
+  }
+  applyFilters() {
+    const queryParams: any = {};
+    if (this.userIdFilter) {
+      queryParams.userId = this.userIdFilter;
+    } else {
+      queryParams.userId = ""
+    }
+    if (this.postIdFilter) {
+      queryParams.postId = this.postIdFilter;
+    } else {
+      queryParams.postId = ""
+    }
+    if (this.categoryIdFilter) {
+      queryParams.categoryId = this.categoryIdFilter;
+    } else {
+      queryParams.categoryId = ""
+    }
+    this.router.navigate([], {
+      queryParams: queryParams,
+      queryParamsHandling: 'merge'
+    });
+    this.posts = this.getFilteredPosts(this.userIdFilter, this.postIdFilter, this.categoryIdFilter);
+    this.setPageInfoOnInit(this.pageInfo, this.posts)  
   }
 
   addNewItemDetails(){
@@ -151,6 +211,7 @@ export class PostsComponent implements OnInit {
   matchCategoryIdWithName(id : number){
     return this.categoriesService.matchCategoryIdWithName(id)
   }
+
 }
 
 

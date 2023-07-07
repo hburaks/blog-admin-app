@@ -36,9 +36,6 @@ export class CommentDetailsComponent {
       }
     }
   }
-  navigateToCommentsPage() {
-    this.commentsService.navigateToCommentsPage()
-  }
 }
 
 

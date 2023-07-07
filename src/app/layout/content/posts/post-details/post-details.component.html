@@ -1,4 +1,8 @@
 <div class="container shadow p-5">
+  <div class="d-flex justify-content-end">
+    <button type="button" routerLink="/posts" class="btn btn-outline-secondary">Back</button>
+  </div>
+  <div class="text-center mb-3"><strong>Post Details</strong></div>
 <div class="container d-flex justify-content-center">
   <ul class="list-group" *ngIf="postItem" style="width: 50vw;">
     <li class="list-group-item"><strong>ID: </strong> {{postItem.post_id}}</li>

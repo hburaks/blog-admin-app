@@ -37,7 +37,7 @@
       <td>{{item.email}}</td>
       <td>{{item.creation_date}}</td>
       <td>{{item.is_active}}</td>
-      <div class="container d-flex gap-2">
+      <div class="container d-flex gap-2 justify-content-end">
         <a [routerLink]="'/users/'+ item.id" class="btn btn-outline-secondary">i</a>
         <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(item)">Edit</button>
         <button type="button" class="btn btn-outline-danger" (click)="removeItem(item)">Remove</button>
