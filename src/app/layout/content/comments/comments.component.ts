@@ -4,6 +4,10 @@ import { CommentsService } from './comments.service';
 import { TableService } from '../table/table.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { PostsService } from '../posts/posts.service';
+import { UsersService } from '../users/users.service';
+import { Posts } from '../posts/posts';
+import { Users } from '../users/users';
 
 @Component({
   selector: 'app-comments',
@@ -22,6 +26,8 @@ export class CommentsComponent implements OnInit {
   combinedClasses: string = "";
   isCommentsFiltered : boolean = false;
   postIdToFilter : number = 0;
+  posts : Posts[] = this.postsService.getPostList();
+  users : Users[] = this.usersService.getUserList();
 
   postIdNew : number = 0;
   userIdNew : number = 0;
@@ -36,8 +42,9 @@ export class CommentsComponent implements OnInit {
   
   constructor(
     private commentsService : CommentsService,
+    private postsService : PostsService,
+    private usersService : UsersService,
     private tableService : TableService,
-    private route: ActivatedRoute
   ){
   }
 
