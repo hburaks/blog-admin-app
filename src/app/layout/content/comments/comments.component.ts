@@ -12,8 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CommentsComponent implements OnInit {
   comments : Comments[] = this.commentsService.getCommentsList();
+  commentsFiltered : Comments[] | null = null ;
   filteredComments: Comments[] = [];
-  postIdFilter: number = 0;
   isEditItem : boolean[] = this.tableService.getIsEditItem();
   isAddNewItem: boolean = false;
   myIsAddNewItemSubscription: Subscription | undefined;
@@ -21,6 +21,7 @@ export class CommentsComponent implements OnInit {
   myPageInfoSubscription : Subscription | undefined;
   combinedClasses: string = "";
   isCommentsFiltered : boolean = false;
+  postIdToFilter : number = 0;
 
   postIdNew : number = 0;
   userIdNew : number = 0;
@@ -47,14 +48,7 @@ export class CommentsComponent implements OnInit {
     this.myPageInfoSubscription = this.tableService.PageInfo$.subscribe(value => {
       this.pageInfo = value;
     }) 
-    this.route.queryParams.subscribe(params => {
-      const postId = params['postId'];
-    });
     this.comments = this.commentsService.getCommentsList();
-    this.route.queryParams.subscribe(params => {
-      this.postIdFilter = parseInt(params['postId']);
-      this.filterByPostId();
-    });
     this.combinedClasses = this.tableService.getCombinedClasses();
     this.setPageInfoOnInit(this.pageInfo, this.comments)
     this.isCommentsFiltered = false;
@@ -137,16 +131,10 @@ export class CommentsComponent implements OnInit {
     this.isCommentsFiltered = !this.isCommentsFiltered
   }
   
-  filterByPostId(): void {
-    if (this.postIdFilter > 0) {
-      this.comments = this.comments.filter(comment => comment.post_id === this.postIdFilter);
-      this.setPageInfoOnInit(this.pageInfo, this.comments)
-    } else {
-      this.comments = this.commentsService.getCommentsList();
-      this.setPageInfoOnInit(this.pageInfo, this.comments)
-    }
+  filterByPostId(id : number): void {
+    this.commentsFiltered = this.comments.filter(comment => comment.post_id === id);
+    this.postIdToFilter = id;
   }
-  
 }
 
   
