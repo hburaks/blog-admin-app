@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "patikaodev02-angular": {
+    "blog-admin-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "patikaodev02-angular:build:production"
+              "browserTarget": "blog-admin-app:build:production"
             },
             "development": {
-              "browserTarget": "patikaodev02-angular:build:development"
+              "browserTarget": "blog-admin-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "patikaodev02-angular:build"
+            "browserTarget": "blog-admin-app:build"
           }
         },
         "test": {

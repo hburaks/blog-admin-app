@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   navigateToGitHub() {
-    window.open("https://github.com/hburaks/patikaodev02-angular", "_blank");
+    window.open("https://github.com/hburaks/blog-admin-app", "_blank");
   }
 }
