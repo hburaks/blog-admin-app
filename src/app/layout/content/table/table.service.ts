@@ -59,5 +59,17 @@ export class TableService {
       this.setPageInfo(pageSize)
     }
   }
+
+  sortByAsc(table: any[], reference: string): any[] {
+    return table.sort((a, b) => {
+      return b[reference] - a[reference];
+    });
+  }
+
+  sortByDesc(table: any[], reference: string): any[] {
+    return table.sort((a, b) => {
+      return a[reference] - b[reference];
+    });
+  }
   
 }

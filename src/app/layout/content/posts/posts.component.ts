@@ -17,6 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PostsComponent implements OnInit {
   posts : Posts[] = this.postsService.getPostList();
   defaultPosts : Posts[] = this.postsService.getPostList();
+  isSorted : boolean = false;
 
   isEditItem : boolean[] = this.tableService.getIsEditItem();
   isAddNewItem: boolean = false;
@@ -210,6 +211,14 @@ export class PostsComponent implements OnInit {
   }
   matchCategoryIdWithName(id : number){
     return this.categoriesService.matchCategoryIdWithName(id)
+  }
+  sortBy(table : any, reference : string){
+    if(!this.isSorted){
+      this.posts = this.tableService.sortByAsc(table, reference)
+    }else{
+      this.posts = this.tableService.sortByDesc(table, reference)
+    }
+    this.isSorted = !this.isSorted
   }
 
 }

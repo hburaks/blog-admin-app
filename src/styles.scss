@@ -78,3 +78,18 @@ input {
 }
 
 
+.sortable-header {
+  cursor: pointer;
+}
+.sortable-header:hover {
+  color: gray;
+}
+
+.sort-icon {
+  margin-left: 5px;
+}
+
+.sort-icon::after {
+  content: '\25BC';
+}
+
