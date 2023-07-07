@@ -53,7 +53,14 @@ export class UsersComponent implements OnInit {
   
   
   addNewItemDetails(){
+    
     if(this.nameNew && this.emailNew){
+      const isUsernameTaken = this.users.some(user => user.name === this.nameNew);
+
+      if (isUsernameTaken) {
+        alert('This username is already taken.');
+        return;
+      }
       const currentDate = new Date();
       const creationDateNew = currentDate.toISOString().slice(0, 10); // YYYY-MM-DD formatında geçerli tarih
     

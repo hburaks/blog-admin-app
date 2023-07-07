@@ -62,6 +62,7 @@ export class UsersService {
     return this.users.find((user: Users) => user.id === index);
   }
   addNewItemDetails(nameNew : string, emailNew : string, creationDateNew : string, isActiveNew : boolean ){
+    
     let minAvailablePostId = 1;
     const usedPostIds = this.users.map((user) => user.id);
     while (usedPostIds.includes(minAvailablePostId)) {
