@@ -142,6 +142,9 @@ export class CommentsComponent implements OnInit {
     this.commentsFiltered = this.comments.filter(comment => comment.post_id === id);
     this.postIdToFilter = id;
   }
+  matchUserIdWithName(id : number){
+    return this.usersService.matchUserIdWithName(id);
+  }
 }
 
   

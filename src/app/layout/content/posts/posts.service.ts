@@ -1075,5 +1075,4 @@ export class PostsService {
       this.isPostHasComments = false;
     }
   }
-
 }

@@ -35,7 +35,7 @@
     <tr>
       <th>Comment ID</th>
       <th>Post ID</th>
-      <th>User ID</th>
+      <th>User</th>
       <th>Comment</th>
       <th>Creation Date</th>
       <th>Is Confirmed</th>
@@ -45,7 +45,7 @@
     <tr *ngFor="let item of comments | slice : (pageInfo.pageIndex*pageInfo.pageSize) : ((pageInfo.pageIndex*pageInfo.pageSize) + pageInfo.pageSize); let i = index">
       <td>{{item.comment_id}}</td>
       <td>{{item.post_id}}</td>
-      <td>{{item.user_id}}</td>
+      <td>{{matchUserIdWithName(item.user_id)}}</td>
       <td>{{item.comment}}</td>
       <td>{{item.creation_date}}</td>
       <td>{{item.is_confirmed}}</td>
