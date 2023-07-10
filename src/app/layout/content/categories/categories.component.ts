@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from './categories.service';
 import { TableService } from '../table/table.service';
 import { Subscription } from 'rxjs';
+import { PostCount } from './post-count';
 
 @Component({
   selector: 'app-categories',
@@ -17,6 +18,8 @@ export class CategoriesComponent implements OnInit {
   pageInfo : any = {}
   myPageInfoSubscription : Subscription | undefined;
   combinedClasses: string = "";
+  isSorted : boolean = false;
+  categoriesWithPostCounts : PostCount[] = [];
 
   nameNew : string = "";
 
@@ -37,6 +40,14 @@ export class CategoriesComponent implements OnInit {
         this.pageInfo = value;
       }) 
       this.combinedClasses = this.tableService.getCombinedClasses();
+      for (const category of this.categories) {
+        const postCount = this.getCategoryPostCount(category.category_id);
+        const categoryWithPostCount: PostCount = {
+          category_id: category.category_id,
+          post_count: postCount,
+        };      
+        this.categoriesWithPostCounts.push(categoryWithPostCount)
+      }
     }
     ngOnDestroy(): void {
       if (this.myIsAddNewItemSubscription) {
@@ -105,6 +116,25 @@ export class CategoriesComponent implements OnInit {
       this.setPageInfoOnInit(this.pageInfo, this.categories)
   }
 
+  sortByPostCount(){
+    const reference = "post_count";
+    const table = this.categoriesWithPostCounts;
+    if(!this.isSorted){
+      this.categoriesWithPostCounts = this.tableService.sortByAsc(table, reference)
+    }else{
+      this.categoriesWithPostCounts = this.tableService.sortByDesc(table, reference)
+    }
+    const tempCategories: Categories[] = [...this.categories]; // Temporarily store the original categories
+    this.categories = [];
+    for (const categoryWithPostCount of this.categoriesWithPostCounts) {
+      const matchingCategory = tempCategories.find(category => category.category_id === categoryWithPostCount.category_id);
+      if (matchingCategory) {
+        this.categories.push(matchingCategory);
+      }
+    }
+    this.isSorted = !this.isSorted
+  }
+  
 }    
 
 
