@@ -50,7 +50,7 @@
       <td>{{item.creation_date}}</td>
       <td>{{item.is_confirmed}}</td>
       <div class="container d-flex gap-2 justify-content-end">
-        <a class="btn btn-outline-secondary" [routerLink]="'/comments'" *ngIf="!isCommentsFiltered"  (click)="filterByPostId(item.post_id); toggleFilter()">Filtre</a>
+        <a class="btn btn-outline-secondary" [routerLink]="'/comments'" *ngIf="!isCommentsFiltered"  (click)="filterByPostId(item.post_id); toggleFilter()">Filter</a>
         <a [routerLink]="'/comments/'+ item.comment_id" class="btn btn-outline-secondary">i</a>
         <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(item)">Edit</button>
         <button type="button" class="btn btn-outline-danger" (click)="removeItem(item)">Remove</button>
@@ -112,6 +112,7 @@
           <td>{{item.is_confirmed}}</td>
           <div class="container d-flex gap-2">
             <a [routerLink]="'/comments/'+ item.comment_id" class="btn btn-outline-secondary">i</a>
+            <button type="button" class="btn btn-outline-danger" (click)="removeItem(item);filterByPostId(item.post_id)">Remove</button>
           </div>
           <div class="overlay" *ngIf="isEditItem[i]">
             <div class="container d-flex gap-2 m-3 p-3 card">
