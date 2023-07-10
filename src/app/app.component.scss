@@ -1,13 +1,17 @@
 .sidebar {
-  height: 90vh;
+  height: 90vh !important;
   width: 300px !important;
 }
-
+.header {
+  height: 10vh;
+  z-index: 100000000000000;
+}
 @media (max-width: 768px) {
   .sidebar {
-    height: 90vh;
+    height: 90vh !important;
     width: 100px !important;
   }
-
-
+  .header {
+    height: 90px;
+  }
 }
