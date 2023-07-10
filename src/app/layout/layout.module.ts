@@ -22,6 +22,7 @@ import { ContentModule } from './content/content.module';
   exports: [
     HeaderComponent,
     ContentComponent,
+    SideBarComponent
   ]
 })
 export class LayoutModule { }

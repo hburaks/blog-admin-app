@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'patikaodev02-angular';
+  title = 'hburak-media-admin';
 }

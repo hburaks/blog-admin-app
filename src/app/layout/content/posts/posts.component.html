@@ -1,5 +1,5 @@
+<div class="container d-flex gap-4 mt-3 mb-3 align-items-center text-nowrap">
 <app-table [table]="posts"></app-table>
-<div class="container d-flex gap-4 mt-3 mb-3 align-items-center">
   <select class="form-select" [(ngModel)]="userIdFilter">
     <option value="">All Users</option>
     <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
@@ -52,7 +52,7 @@
   </div>
 </div>
 
-<div  class="container d-flex align-items-center flex-column">
+
 <table class="table">
   <thead>
     <tr>
@@ -123,6 +123,5 @@
       </tr>
   </tbody>
 </table>
-</div>
 
   
