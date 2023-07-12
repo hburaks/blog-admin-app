@@ -1,17 +1,33 @@
 .sidebar {
-  height: 90vh !important;
-  width: 300px !important;
+  height: 94vh !important;
+  width: 220px !important;
 }
-.header {
-  height: 10vh;
-  z-index: 100000000000000;
+.content {
+  overflow: auto;
+  height: 94vh;
+
 }
-@media (max-width: 768px) {
+
+
+@media (max-width: 1090px) {
   .sidebar {
-    height: 90vh !important;
-    width: 100px !important;
+    height: 0px !important;
+    width: 0px !important;
   }
-  .header {
-    height: 90px;
+  .content {
+    padding: 1rem;
+    height: 94vh;
+    overflow: auto;
+    margin-top: 1rem;
+
   }
+}
+
+.shadow {
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.shadow-r {
+  box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.2) !important;
+
 }

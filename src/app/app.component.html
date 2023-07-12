@@ -1,14 +1,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-<div class="bg-dark">
-  <div class="container-fluid p-0 header">
-    <app-header></app-header>
+<div class="container-fluid m-0 p-0 shadow lg-dark-bg">
+  <app-header></app-header>
+</div>
+<div class="d-flex">
+  <div class="m-0 sidebar shadow-r md-dark-bg">
+    <app-side-bar></app-side-bar>
   </div>
-  <div class="d-flex">
-    <div class="container m-0 sidebar">
-      <app-side-bar></app-side-bar>
-    </div>
-    <div class="container-fluid table-responsive p-5 bg-white">
-      <app-content></app-content>
-    </div>
+  <div class="container-fluid table-responsive p-5 content">
+    <app-content></app-content>
   </div>
 </div>

@@ -38,11 +38,13 @@ $blog-admin-app-theme: mat.define-light-theme((
 @import "/Users/hburaks/Desktop/repos/blog-admin-app/node_modules/bootstrap";
 
 .md-dark-bg {
-  background-color: #262626; 
+  background-color: #292929; 
 }
 .lg-dark-bg {
-  background-color: #212121
+  background-color: #222222;
+  color: rgba(255, 255, 255, 0.55)
 }
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -50,8 +52,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .shadow {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
 }
 .overlay {
   position: fixed;
@@ -92,3 +93,6 @@ input {
   content: '\25BC';
 }
 
+table {
+  z-index: -1 !important;
+}

@@ -1,8 +1,8 @@
   @media (max-width: 768px) {
     .navbar-nav .nav-link {
-      font-size: 0; /* Tüm metni gizlemek için font boyutunu sıfırlıyoruz */
+      font-size: 0;
     }
     .navbar-nav .nav-link::first-letter {
-      font-size: 1.5rem; /* İlk harfi yeniden boyutlandırıyoruz */
+      font-size: 1.5rem;
     }
   }

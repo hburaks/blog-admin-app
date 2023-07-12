@@ -1,14 +1,14 @@
 <app-table [table]="posts"></app-table>
-<div class="container d-flex gap-4 mt-3 mb-3 align-items-center">
-  <select class="form-select" [(ngModel)]="userIdFilter">
+<div class="container d-flex gap-4 mt-3 mb-3 align-items-center text-nowrap select-container">
+  <select class="form-select btn" [(ngModel)]="userIdFilter">
     <option value="">All Users</option>
     <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
   </select>
-  <select class="form-select" [(ngModel)]="postIdFilter">
+  <select class="form-select btn" [(ngModel)]="postIdFilter">
     <option value="">All Posts</option>
     <option *ngFor="let post of defaultPosts" [value]="post.post_id">{{ post.title }}</option>
   </select>
-  <select class="form-select" [(ngModel)]="categoryIdFilter">
+  <select class="form-select btn" [(ngModel)]="categoryIdFilter">
     <option value="">All Categories</option>
     <option *ngFor="let category of categories" [value]="category.category_id">{{ category.name }}</option>
   </select>
@@ -16,7 +16,7 @@
 </div>
 
 <div class="overlay" *ngIf="isAddNewItem">
-  <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
+  <div class="container d-flex gap-2 m-3 p-3 card add-edit-card">
     <div [ngClass]="combinedClasses">
       <label for="user_id">User ID: {{userIdNew}}</label>
       <select class="form-control" style="width: 225px" id="user_id" [(ngModel)]="userIdNew">
@@ -53,7 +53,7 @@
 </div>
 
 
-<table class="table">
+<table class="table container-fluid mt-3">
   <thead>
     <tr>
       <th>ID</th>
@@ -75,12 +75,12 @@
       <td>{{item.creation_date}}</td>
       <td>{{item.is_published}}</td>
       <div class="container d-flex gap-2 justify-content-end">
-        <a [routerLink]="'/posts/'+ item.post_id" class="btn btn-outline-secondary">i</a>
+        <a [routerLink]="'/posts/'+ item.post_id" class="btn btn-outline-secondary ">i</a>
         <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(item)">Edit</button>
         <button type="button" class="btn btn-outline-danger" (click)="removeItem(item)">Remove</button>
       </div>
       <div class="overlay" *ngIf="isEditItem[i]">
-        <div class="container d-flex gap-2 m-3 p-3 card">
+        <div class="container d-flex gap-2 m-3 p-3 card add-edit-card">
           <div [ngClass]="combinedClasses">
             <label for="user_id">User ID: {{userIdIn}}</label>
             <select class="form-control" style="width: 225px" id="user_id" [(ngModel)]="userIdIn">
