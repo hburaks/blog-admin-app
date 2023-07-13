@@ -75,7 +75,7 @@
       <td>{{item.creation_date}}</td>
       <td>{{item.is_published}}</td>
       <div class="container d-flex gap-2 justify-content-end">
-        <button type="button" class="btn btn-outline-secondary" (click)="showDetailItemCard(i)">Details</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="showDetailItemCard(i); updateDetailItemCard(item)">Details</button>
         <a [routerLink]="'/posts/'+ item.post_id" class="btn btn-outline-secondary ">Comments</a>
         <button type="button" class="btn btn-outline-warning" (click)="showEditItemCard(i); updateEditInputs(item)">Edit</button>
         <button type="button" class="btn btn-outline-danger" (click)="removeItem(item)">Remove</button>

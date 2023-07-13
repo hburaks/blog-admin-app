@@ -1020,8 +1020,8 @@ export class PostsService {
     return this.posts
   }
 
-  getPost(index: number): Posts | undefined {
-    return this.posts.find((post: Posts) => post.post_id === index);
+  getPost(index: number, posts : Posts[]): Posts | undefined {
+    return posts.find((post: Posts) => post.post_id === index);
   }
 
   addNewItemDetails(userIdNew : number, categoryIdNew : number, titleNew : string, contentNew : string , viewCountNew : number, creationDateNew : string, isPublishedNew : boolean ){

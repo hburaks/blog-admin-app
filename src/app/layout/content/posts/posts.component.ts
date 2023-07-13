@@ -185,12 +185,15 @@ export class PostsComponent implements OnInit {
   }
 
   showEditItemCard(i : number){
-    this.showEditItemCard = this.tableService.showEditItemCard;
+    this.tableService.showEditItemCard(i);
   }
 
   showDetailItemCard(i : number){
-    this.postItem = this.postsService.getPost(i + 1)
-    this.tableService.showDetailItemCard(i + 1);
+    this.tableService.showDetailItemCard(i);
+  }
+
+  updateDetailItemCard(item : Posts){
+    this.postItem = item
   }
   closeDetailItemCard(i : number){
     this.tableService.showDetailItemCard(i);
@@ -230,6 +233,7 @@ export class PostsComponent implements OnInit {
     }
     this.isSorted = !this.isSorted
   }
+  
 
   
   
