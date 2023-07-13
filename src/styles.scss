@@ -70,13 +70,41 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .card {
   z-index: 9999;
   max-height: 80vh;
-  max-width: 50vh !important;
+  max-width: 30vw !important;
   overflow-y: auto;
 }
-input {
-  max-width: 14rem !important;
+input, select {
+  max-width: 15rem ;
+}
+@media (max-width : 768px) {
+  .card {
+    > div > input,
+    > div > select {
+      max-width: 12rem ;
+    }
+  }
+}
+@media (max-width : 576px) {
+  .card {
+    width: 90vw ;
+    max-width: 90vw !important;
+    > div > input,
+    > div > select {
+      max-width: 10rem ;
+    }
+  }
 }
 
+@media (max-width : 400px) {
+  .card {
+    width: 90vw ;
+    max-width: 90vw;
+    > div > input,
+    > div > select {
+      max-width: 8rem ;
+    }
+  }
+}
 
 .sortable-header {
   cursor: pointer;

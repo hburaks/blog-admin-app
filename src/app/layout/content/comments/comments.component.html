@@ -4,13 +4,13 @@
   <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
     <div [ngClass]="combinedClasses">
       <label for="post_id">Post ID: {{postIdNew}}</label>
-      <select class="form-control" style="width: 225px" id="post_id" [(ngModel)]="postIdNew">
+      <select class="form-control"  id="post_id" [(ngModel)]="postIdNew">
         <option *ngFor="let post of posts" [value]="post.post_id">{{ post.title }}</option>
       </select>
     </div>
     <div [ngClass]="combinedClasses">
       <label for="user_id">User ID: {{userIdNew}}</label>
-      <select class="form-control" style="width: 225px" id="user_id" [(ngModel)]="userIdNew">
+      <select class="form-control"  id="user_id" [(ngModel)]="userIdNew">
         <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
       </select>
     </div>

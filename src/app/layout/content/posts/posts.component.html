@@ -1,5 +1,6 @@
+<div class="d-flex flex-column">
 <app-table [table]="posts"></app-table>
-<div class="container d-flex gap-4 mt-3 mb-3 align-items-center text-nowrap select-container">
+<div class="d-flex gap-4 mt-3 mb-3 mx-0 my-0 text-nowrap container-fluid  justify-content-between">
   <select class="form-select btn" [(ngModel)]="userIdFilter">
     <option value="">All Users</option>
     <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
@@ -19,13 +20,13 @@
   <div class="container d-flex gap-2 m-3 p-3 card add-edit-card">
     <div [ngClass]="combinedClasses">
       <label for="user_id">User ID: {{userIdNew}}</label>
-      <select class="form-control" style="width: 225px" id="user_id" [(ngModel)]="userIdNew">
+      <select class="form-control" id="user_id" [(ngModel)]="userIdNew">
         <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
       </select>
     </div>
     <div [ngClass]="combinedClasses">
       <label for="category_id">Category ID: {{categoryIdNew}}</label>
-      <select class="form-control" style="width: 225px" id="category_id" [(ngModel)]="categoryIdNew">
+      <select class="form-control" id="category_id" [(ngModel)]="categoryIdNew">
         <option *ngFor="let category of categories" [value]="category.category_id">{{ category.name }}</option>
       </select>
     </div>
@@ -84,13 +85,13 @@
         <div class="container d-flex gap-2 m-3 p-3 card add-edit-card">
           <div [ngClass]="combinedClasses">
             <label for="user_id">User ID: {{userIdIn}}</label>
-            <select class="form-control" style="width: 225px" id="user_id" [(ngModel)]="userIdIn">
+            <select class="form-control" id="user_id" [(ngModel)]="userIdIn">
               <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
             </select>
           </div>
           <div [ngClass]="combinedClasses">
             <label for="category_id">Category ID: {{categoryIdIn}}</label>
-            <select class="form-control" style="width: 225px" id="category_id" [(ngModel)]="categoryIdIn">
+            <select class="form-control" id="category_id" [(ngModel)]="categoryIdIn">
               <option *ngFor="let category of categories" [value]="category.category_id">{{ category.name }}</option>
             </select>
           </div>
@@ -145,4 +146,4 @@
   </tbody>
 </table>
 
-  
+</div>
