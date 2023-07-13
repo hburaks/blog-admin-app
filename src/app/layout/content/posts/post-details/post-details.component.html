@@ -1,8 +1,6 @@
-<div class="container shadow p-5">
   <div class="d-flex justify-content-end">
     <button type="button" routerLink="/posts" class="btn btn-outline-secondary">Back</button>
   </div>
-
   <div class="text-center mt-5"><strong>Comments for the Post</strong></div>
   <div class="text-center">Count : {{comments.length}}</div>
   <table *ngIf="comments.length >= 1" class="table mt-2">
@@ -29,4 +27,3 @@
     </tbody>
   </table>  
   <div *ngIf="comments.length < 1" class="mt-2 text-center">No comments on this post.</div>
-</div>

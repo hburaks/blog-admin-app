@@ -1,6 +1,5 @@
-<div class="d-flex flex-column">
 <app-table [table]="posts"></app-table>
-<div class="d-flex gap-4 mt-3 mb-3 mx-0 my-0 text-nowrap container-fluid  justify-content-between">
+<div class="d-flex gap-4 mt-3 mb-3 mx-0 my-0 text-nowrap container-fluid justify-content-between select-container">
   <select class="form-select btn" [(ngModel)]="userIdFilter">
     <option value="">All Users</option>
     <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
@@ -61,7 +60,7 @@
       <th>User</th>
       <th>Category</th>
       <th>Title</th>
-      <th><div class="sortable-header" (click)="sortBy(posts, 'view_count')">View Count <span class="sort-icon"></span></div></th>
+      <th><div class="sortable-header" (click)="sortBy(posts, 'view_count')">View Count <i class='bx bx-sort fs-4 sort-icon' ></i></div></th>
       <th>Creation Date</th>
       <th>Is Published</th>
     </tr>
@@ -145,5 +144,3 @@
     </tr>
   </tbody>
 </table>
-
-</div>

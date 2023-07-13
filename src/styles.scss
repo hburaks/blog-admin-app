@@ -72,12 +72,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   max-height: 80vh;
   max-width: 30vw !important;
   overflow-y: auto;
+  > div > input,
+    > div > select {
+      max-width: 15rem ;
+    }
 }
-input, select {
-  max-width: 15rem ;
+@media (max-width : 1200px) {
+  .card {
+    width: 400vw ;
+    max-width: 40vw !important;
+    > div > input,
+    > div > select {
+      max-width: 15rem ;
+    }
+  }
 }
 @media (max-width : 768px) {
   .card {
+    width: 50vw ;
+    max-width: 50vw !important;
     > div > input,
     > div > select {
       max-width: 12rem ;
@@ -107,6 +120,8 @@ input, select {
 }
 
 .sortable-header {
+  display: flex;
+  align-items: center;
   cursor: pointer;
 }
 .sortable-header:hover {
@@ -114,13 +129,11 @@ input, select {
 }
 
 .sort-icon {
-  margin-left: 5px;
-}
-
-.sort-icon::after {
-  content: '\25BC';
+  margin-left: 8px;
 }
 
 table {
   z-index: -1 !important;
+  min-width: 850px !important;
+
 }

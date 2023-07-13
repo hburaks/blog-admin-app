@@ -1,3 +1,4 @@
+
 <app-table [table]="categories"></app-table>
 <div class="overlay" *ngIf="isAddNewItem">
   <div class="container d-flex gap-2 m-3 p-3 card" style="max-width: 30vw;">
@@ -17,7 +18,7 @@
       <th>Category ID</th>
       <th>Name</th>
       <th>Creation Date</th>
-      <th><div class="sortable-header" (click)="sortByPostCount()">Post Count <span class="sort-icon"></span></div></th>
+      <th><div class="sortable-header" (click)="sortByPostCount()">Post Count <i class='bx bx-sort fs-4 sort-icon' ></i></div></th>
     </tr>
   </thead>
   <tbody>
