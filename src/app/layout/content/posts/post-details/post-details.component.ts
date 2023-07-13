@@ -16,7 +16,6 @@ import { Comments } from '../../comments/comments';
   styleUrls: ['./post-details.component.scss']
 })
 export class PostDetailsComponent implements OnInit {
-  postItem? : Posts;
   posts : Posts[] = this.postsService.getPostList();
   categories : Categories[] = this.categoriesService.getCategoryList();
   pageInfo : any = {}
@@ -33,7 +32,6 @@ export class PostDetailsComponent implements OnInit {
     ){
     const params = this.route.snapshot.params
     const postItemId = Number(params['id']); 
-    this.postItem = this.postsService.getPost(postItemId)
     this.filterCommentsMatched(postItemId)
   }
   ngOnInit(): void {

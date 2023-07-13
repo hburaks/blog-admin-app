@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class TableService {
   isAddNewItem: boolean = false;
   isEditItem : boolean[] = [];
+  isDetailItem : boolean[] = [];
   combinedClasses : string = "";
   
   private pageInfoSubject: BehaviorSubject<any> = new BehaviorSubject<any>({
@@ -43,6 +44,12 @@ export class TableService {
   }
   getIsEditItem(){
     return this.isEditItem
+  }
+  showDetailItemCard(i : number){
+    this.isDetailItem[i] = !this.isDetailItem[i];
+  }
+  getIsDetailItem(){
+    return this.isDetailItem
   }
   getCombinedClasses(): string {
     this.combinedClasses = 'container d-flex align-items-center gap-2 justify-content-between';

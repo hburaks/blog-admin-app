@@ -20,7 +20,9 @@ export class PostsComponent implements OnInit {
   isSorted : boolean = false;
 
   isEditItem : boolean[] = this.tableService.getIsEditItem();
+  postItem? : Posts;
   isAddNewItem: boolean = false;
+  isDetailItem: boolean[] = this.tableService.getIsDetailItem();
   myIsAddNewItemSubscription: Subscription | undefined;
   pageInfo : any = {}
   myPageInfoSubscription : Subscription | undefined;
@@ -28,7 +30,7 @@ export class PostsComponent implements OnInit {
   categories : Categories[] = this.categoriesService.getCategoryList();
 
 
-
+ 
   combinedClasses: string = "";
 
   userIdNew : number = 0;
@@ -186,6 +188,14 @@ export class PostsComponent implements OnInit {
     this.showEditItemCard = this.tableService.showEditItemCard;
   }
 
+  showDetailItemCard(i : number){
+    this.postItem = this.postsService.getPost(i + 1)
+    this.tableService.showDetailItemCard(i + 1);
+  }
+  closeDetailItemCard(i : number){
+    this.tableService.showDetailItemCard(i);
+  }
+
   updateEditInputs(item : Posts){
     this.userIdIn = item.user_id;
     this.categoryIdIn = item.category_id;
@@ -221,17 +231,8 @@ export class PostsComponent implements OnInit {
     this.isSorted = !this.isSorted
   }
 
+  
+  
+
+
 }
-
-
-
-
-   
-    
-  
-  
-  
-  
-  
- 
-  
