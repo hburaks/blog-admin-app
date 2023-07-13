@@ -1,11 +1,17 @@
 .sidebar {
-  height: 94vh !important;
+  height: 92vh !important;
   width: 220px !important;
+  padding-top: 5rem !important;
 }
 .content {
   overflow: auto;
-  height: 94vh;
+  height: 85vh;
+  position: relative;
+  top: 20px;
+}
 
+.top {
+  height: 8vh !important;
 }
 
 
@@ -16,10 +22,9 @@
   }
   .content {
     padding: 1rem;
-    height: 94vh;
+    height: 92vh;
     overflow: auto;
-    margin-top: 1rem;
-
+    
   }
 }
 
