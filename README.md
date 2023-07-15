@@ -3,7 +3,7 @@
 
 This project aims to create a simple blog management system using Angular. In this system, you will be able to manage data such as users, posts, categories, and comments.
 
-Project Link: ** 'blog-admin-app.vercel.app/' **
+Project Link: ***https://blog-admin-app.vercel.app***
 
 ## Models
 
